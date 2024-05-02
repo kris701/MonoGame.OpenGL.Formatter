@@ -1,9 +1,12 @@
-﻿using MonoGame.OpenGL.Formatter.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Helpers;
 
 namespace MonoGame.OpenGL.Formatter.Views
 {
+    /// <summary>
+    /// A base class for a fading <seealso cref="IView"/>
+    /// </summary>
     public abstract class BaseFadeView : BaseView
     {
         public enum FadeState { FadeIn, Hold, FadeOut, PostHold }

@@ -1,7 +1,4 @@
-﻿#if DEBUG && TILEBORDER
-using BugDefender.OpenGL.Engine.Helpers;
-#endif
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame.OpenGL.Formatter.Controls
@@ -174,24 +171,6 @@ namespace MonoGame.OpenGL.Formatter.Controls
                         SpriteEffects.None,
                         0);
             }
-#if DEBUG && CENTERPOINT
-            spriteBatch.Draw(
-                BasicTextures.GetBasicRectange(Color.Black),
-                new Vector2(X, Y),
-                new Rectangle(0, 0, 5, 5),
-                GetAlphaColor(),
-                0,
-                new Vector2(0, 0),
-                1,
-                SpriteEffects.None,
-                0);
-#endif
-#if DEBUG && TILEBORDER
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X, Y), new Rectangle((int)X, (int)Y, (int)Width, 1), _alphaColor);
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X, Y), new Rectangle((int)X, (int)Y, 1, (int)Height), _alphaColor);
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X + Width, Y), new Rectangle((int)(X + Width), (int)Y, 1, (int)Height), _alphaColor);
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(X, Y + Height), new Rectangle((int)X, (int)(Y + Height), (int)(Width + 1), 1), _alphaColor);
-#endif
         }
     }
 }

@@ -4,24 +4,28 @@ using Microsoft.Xna.Framework.Media;
 
 namespace MonoGame.OpenGL.Formatter.Audio
 {
-    public class AudioController
+    /// <summary>
+    /// <seealso cref="IController"/> implementation for handling music and sound effects
+    /// </summary>
+    public class AudioController : IController
     {
+        public ContentManager ContentManager { get; }
+
         private readonly Dictionary<Guid, SongDefinition> _songs = new Dictionary<Guid, SongDefinition>();
         private readonly Dictionary<Guid, SoundEffectDefinition> _soundEffects = new Dictionary<Guid, SoundEffectDefinition>();
         private readonly Dictionary<Guid, SoundEffectInstance> _instances = new Dictionary<Guid, SoundEffectInstance>();
         private string _playing = "";
-        private readonly ContentManager _contentManager;
 
         public AudioController(ContentManager contentManager)
         {
-            _contentManager = contentManager;
+            ContentManager = contentManager;
         }
 
         public void LoadSong(SongDefinition item)
         {
             if (_songs.ContainsKey(item.ID))
                 _songs.Remove(item.ID);
-            item.LoadContent(_contentManager);
+            item.LoadContent(ContentManager);
             _songs.Add(item.ID, item);
         }
 
@@ -29,7 +33,7 @@ namespace MonoGame.OpenGL.Formatter.Audio
         {
             if (_soundEffects.ContainsKey(item.ID))
                 _soundEffects.Remove(item.ID);
-            item.LoadContent(_contentManager);
+            item.LoadContent(ContentManager);
             _soundEffects.Add(item.ID, item);
         }
 

@@ -1,8 +1,8 @@
-﻿using MonoGame.OpenGL.Formatter.Controls.Elements;
-using MonoGame.OpenGL.Formatter.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.OpenGL.Formatter.Controls.Elements;
+using MonoGame.OpenGL.Formatter.Helpers;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
@@ -25,7 +25,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(IWindow parent, ClickedHandler? clicked = null) : base()
+        public ButtonControl(IWindow parent, SpriteFont font, ClickedHandler? clicked = null) : base(font)
         {
             Parent = parent;
             Clicked += clicked;

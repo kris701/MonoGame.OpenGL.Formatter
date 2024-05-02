@@ -1,7 +1,6 @@
-﻿using MonoGame.OpenGL.Formatter.Controls.Elements;
-using MonoGame.OpenGL.Formatter.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Controls.Elements;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
@@ -29,12 +28,11 @@ namespace MonoGame.OpenGL.Formatter.Controls
 
         private readonly TextElement _element;
 
-        public LabelControl()
+        public LabelControl(SpriteFont font)
         {
-            _element = new TextElement(this)
+            _element = new TextElement(this, font)
             {
                 Text = "",
-                Font = BasicFonts.GetFont(10),
                 FontColor = Color.White
             };
         }

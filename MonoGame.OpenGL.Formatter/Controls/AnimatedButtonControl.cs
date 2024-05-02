@@ -1,6 +1,6 @@
-﻿using MonoGame.OpenGL.Formatter.Controls.Elements;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Controls.Elements;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
@@ -32,7 +32,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         }
         public AnimatedTileElement AnimatedElement;
 
-        public AnimatedButtonControl(IWindow parent, ClickedHandler? clicked = null) : base(parent, clicked)
+        public AnimatedButtonControl(IWindow parent, SpriteFont font, ClickedHandler? clicked = null) : base(parent, font, clicked)
         {
             AnimatedElement = new AnimatedTileElement(this);
         }

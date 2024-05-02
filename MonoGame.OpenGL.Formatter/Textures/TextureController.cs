@@ -1,13 +1,17 @@
-﻿using MonoGame.OpenGL.Formatter.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Helpers;
 
 namespace MonoGame.OpenGL.Formatter.Textures
 {
-    public class TextureController
+    /// <summary>
+    /// <seealso cref="IController"/> implementation for handling textures
+    /// </summary>
+    public class TextureController : IController
     {
-        private readonly ContentManager _contentManager;
+        public ContentManager ContentManager { get; }
+
         private readonly Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
         private readonly Dictionary<Guid, TextureSetDefinition> _textureSets = new Dictionary<Guid, TextureSetDefinition>();
         private Texture2D? _noTexture;
@@ -15,14 +19,14 @@ namespace MonoGame.OpenGL.Formatter.Textures
 
         public TextureController(ContentManager contentManager)
         {
-            _contentManager = contentManager;
+            ContentManager = contentManager;
         }
 
         public void LoadTexture(TextureDefinition item)
         {
             if (_textures.ContainsKey(item.ID))
                 _textures.Remove(item.ID);
-            item.LoadContent(_contentManager);
+            item.LoadContent(ContentManager);
             _textures.Add(item.ID, item);
         }
 
@@ -30,7 +34,7 @@ namespace MonoGame.OpenGL.Formatter.Textures
         {
             if (_textureSets.ContainsKey(item.ID))
                 _textureSets.Remove(item.ID);
-            item.LoadContent(_contentManager);
+            item.LoadContent(ContentManager);
             _textureSets.Add(item.ID, item);
         }
 

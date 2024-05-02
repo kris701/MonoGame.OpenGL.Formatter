@@ -19,7 +19,7 @@
         public void Trigger()
         {
             if (SoundEffect != Guid.Empty)
-                _parent.AudioController.PlaySoundEffectOnce(SoundEffect);
+                _parent.Audio.PlaySoundEffectOnce(SoundEffect);
         }
     }
 }

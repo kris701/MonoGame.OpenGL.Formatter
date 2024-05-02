@@ -1,11 +1,14 @@
-﻿using MonoGame.OpenGL.Formatter.Controls;
-using MonoGame.OpenGL.Formatter.Textures;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Controls;
+using MonoGame.OpenGL.Formatter.Textures;
 
 namespace MonoGame.OpenGL.Formatter.Views
 {
-    public class BaseAnimatedView : BaseView
+    /// <summary>
+    /// A base class for a texture animated <seealso cref="IView"/>
+    /// </summary>
+    public abstract class BaseAnimatedView : BaseView
     {
         public enum FadeState { AnimateIn, Hold, AnimateOut, PostHold }
         public FadeState State { get; set; } = FadeState.AnimateIn;

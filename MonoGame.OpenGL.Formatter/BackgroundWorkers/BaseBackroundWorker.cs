@@ -5,8 +5,6 @@ namespace MonoGame.OpenGL.Formatter.BackgroundWorkers
 {
     public abstract class BaseBackroundWorker : IBackgroundWorker
     {
-        public abstract Guid ID { get; }
-
         public virtual void Initialize()
         {
 

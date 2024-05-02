@@ -1,6 +1,6 @@
-﻿using MonoGame.OpenGL.Formatter.Controls.Elements;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Controls.Elements;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {

@@ -1,5 +1,4 @@
-﻿using MonoGame.OpenGL.Formatter.Helpers;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame.OpenGL.Formatter.Controls.Elements
@@ -22,7 +21,7 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
             }
         }
         public Color FontColor { get; set; } = Color.White;
-        private SpriteFont _font = BasicFonts.GetFont(8);
+        private SpriteFont _font;
         public SpriteFont Font
         {
             get
@@ -42,9 +41,10 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
         internal float _textHeight = 0;
         internal bool _textChanged = true;
 
-        public TextElement(IControl parent)
+        public TextElement(IControl parent, SpriteFont font)
         {
             Parent = parent;
+            _font = font;
         }
 
         private void UpdateTextPositions()
@@ -83,12 +83,6 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
                     1f,
                     SpriteEffects.None,
                     0);
-#if TEXTBORDER
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY), new Rectangle((int)_textX, (int)_textY, (int)_textWidth, 1), Color.Red);
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY), new Rectangle((int)_textX, (int)_textY, 1, (int)_textHeight), Color.Red);
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX + _textWidth, _textY), new Rectangle((int)(_textX + _textWidth), (int)_textY, 1, (int)_textHeight), Color.Red);
-            spriteBatch.Draw(BasicTextures.GetBasicRectange(Color.Purple), new Vector2(_textX, _textY + _textHeight), new Rectangle((int)_textX, (int)(_textY + _textHeight), (int)(_textWidth + 1), 1), Color.Red);
-#endif
         }
     }
 }

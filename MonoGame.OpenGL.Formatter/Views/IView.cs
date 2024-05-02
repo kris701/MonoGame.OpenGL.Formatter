@@ -1,9 +1,13 @@
-﻿using MonoGame.OpenGL.Formatter.Controls;
-using Microsoft.Xna.Framework;
+﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Controls;
 
 namespace MonoGame.OpenGL.Formatter.Views
 {
+    /// <summary>
+    /// A View can be seen as a virtual window inside of a <seealso cref="IWindow"/>.
+    /// A <seealso cref="IView"/> will always take up the entire screen.
+    /// </summary>
     public interface IView
     {
         public Guid ID { get; set; }

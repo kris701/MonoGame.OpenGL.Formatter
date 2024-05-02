@@ -5,6 +5,10 @@ namespace MonoGame.OpenGL.Formatter.Controls
 {
     public enum HorizontalAlignment { None, Left, Middle, Right }
     public enum VerticalAlignment { None, Top, Middle, Bottom }
+
+    /// <summary>
+    /// Basic control interface.
+    /// </summary>
     public interface IControl
     {
         public HorizontalAlignment HorizontalAlignment { get; set; }

@@ -1,11 +1,15 @@
-﻿using MonoGame.OpenGL.Formatter.Audio;
+﻿using Microsoft.Xna.Framework;
+using MonoGame.OpenGL.Formatter.Audio;
 using MonoGame.OpenGL.Formatter.BackgroundWorkers;
+using MonoGame.OpenGL.Formatter.Fonts;
 using MonoGame.OpenGL.Formatter.Textures;
 using MonoGame.OpenGL.Formatter.Views;
-using Microsoft.Xna.Framework;
 
 namespace MonoGame.OpenGL.Formatter
 {
+    /// <summary>
+    /// Basic interface your window must have to work with Formatter.
+    /// </summary>
     public interface IWindow
     {
         public static readonly Point BaseScreenSize = new Point(1920, 1080);
@@ -14,8 +18,9 @@ namespace MonoGame.OpenGL.Formatter
 
         public IView CurrentScreen { get; set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; }
-        public AudioController AudioController { get; }
-        public TextureController TextureController { get; }
+        public AudioController Audio { get; }
+        public TextureController Textures { get; }
+        public FontController Fonts { get; }
         public bool IsActive { get; }
     }
 }
