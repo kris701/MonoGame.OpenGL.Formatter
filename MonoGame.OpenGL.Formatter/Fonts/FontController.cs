@@ -1,7 +1,5 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using Microsoft.Xna.Framework.Content;
+﻿using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using MonoGame.OpenGL.Formatter.Textures;
 
 namespace MonoGame.OpenGL.Formatter.Fonts
 {
@@ -11,13 +9,11 @@ namespace MonoGame.OpenGL.Formatter.Fonts
     public class FontController : IController
     {
         public ContentManager ContentManager { get; }
-        public string ContentDir { get; }
         private readonly Dictionary<Guid, FontDefinition> _fonts = new Dictionary<Guid, FontDefinition>();
 
-        public FontController(ContentManager contentManager, string contentDir)
+        public FontController(ContentManager contentManager)
         {
             ContentManager = contentManager;
-            ContentDir = contentDir;
         }
 
         public void LoadFont(FontDefinition item)
