@@ -5,27 +5,43 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
 	  <Nullable>enable</Nullable>
+	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <Title>MonoGame.OpenGL.Formatter</Title>
 	  <Authors>Kristian Skov Johansen</Authors>
-	  <Copyright>Kristian Skov Johansen</Copyright>
-	  <Product>Bug Defenders OpenGL Engine</Product>
-	  <Version>1.0.0</Version>
-	  <SelfContained>true</SelfContained>
-	  <DebugType>embedded</DebugType>
-	  <PublishReadyToRun>false</PublishReadyToRun>
-	  <TieredCompilation>false</TieredCompilation>
-	  <SignAssembly>True</SignAssembly>
+	  <Description>A package to make it easier to do simple UI elements in Monogame OpenGL.</Description>
+	  <RepositoryUrl>https://github.com/kris701/MonoGame.OpenGL.Formatter</RepositoryUrl>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="MonoGame.Framework.DesktopGL" Version="3.8.1.303" />
   </ItemGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<!--<DefineConstants>$(DefineConstants);CENTERPOINT</DefineConstants>-->
-		<!--<DefineConstants>$(DefineConstants);TILEBORDER</DefineConstants>-->
-		<!--<DefineConstants>$(DefineConstants);TEXTBORDER</DefineConstants>-->
-		<!--<DefineConstants>$(DefineConstants);DRAWBLOCKINGTILES</DefineConstants>-->
-		<!--<DefineConstants>$(DefineConstants);DRAWMAPPATHS</DefineConstants>-->
+	<PropertyGroup>
+		<PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+		<Version>1.0.0</Version>
 	</PropertyGroup>
+
+	<PropertyGroup>
+		<PackageIcon>logo.png</PackageIcon>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="logo.png" Pack="true" PackagePath="" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\LICENSE.txt">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="..\README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 	
 </Project>
