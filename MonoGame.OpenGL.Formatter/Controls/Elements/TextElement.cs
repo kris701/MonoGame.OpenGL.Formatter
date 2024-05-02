@@ -27,7 +27,7 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
             get
             {
                 if (_font == null)
-                    throw new Exception("Font not set!");
+                    throw new Exception($"Font not set for text element with text '{Text}'");
                 return _font;
             }
             set
