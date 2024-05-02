@@ -33,7 +33,6 @@ namespace MonoGame.OpenGL.Formatter.Controls
             _element = new TextElement(this)
             {
                 Text = "",
-                Font = Font,
                 FontColor = Color.White
             };
         }
