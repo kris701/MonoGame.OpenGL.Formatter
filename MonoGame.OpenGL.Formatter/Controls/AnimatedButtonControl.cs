@@ -32,7 +32,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         }
         public AnimatedTileElement AnimatedElement;
 
-        public AnimatedButtonControl(IWindow parent, SpriteFont font, ClickedHandler? clicked = null) : base(parent, font, clicked)
+        public AnimatedButtonControl(IWindow parent, ClickedHandler? clicked = null) : base(parent, clicked)
         {
             AnimatedElement = new AnimatedTileElement(this);
         }

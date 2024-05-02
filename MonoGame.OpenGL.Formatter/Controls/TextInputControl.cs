@@ -55,7 +55,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         private readonly TileControl _iBeam;
         private TimeSpan _iBeamTimer = TimeSpan.Zero;
 
-        public TextInputControl(IWindow parent, SpriteFont font, KeyEventHandler? onEnter = null) : base(font)
+        public TextInputControl(IWindow parent, KeyEventHandler? onEnter = null)
         {
             Parent = parent;
             OnEnter += onEnter;

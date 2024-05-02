@@ -19,11 +19,13 @@ namespace MonoGame.OpenGL.Formatter.Controls
             }
         }
         public Color FontColor { get; set; } = Color.Black;
-        private SpriteFont _font;
+        private SpriteFont? _font;
         public SpriteFont Font
         {
             get
             {
+                if (_font == null)
+                    throw new Exception("Font not set!");
                 return _font;
             }
             set
@@ -35,11 +37,6 @@ namespace MonoGame.OpenGL.Formatter.Controls
         public float Margin { get; set; } = 5;
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();
-
-        public TextboxControl(SpriteFont font)
-        {
-            _font = font;
-        }
 
         public override void Update(GameTime gameTime)
         {
@@ -66,7 +63,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
                 var size = Font.MeasureString(currentString);
                 if (size.X > Width - Margin * 2)
                 {
-                    var newLabel = new LabelControl(_font);
+                    var newLabel = new LabelControl();
                     newLabel.Font = Font;
                     newLabel.Text = currentString;
                     newLabel.FontColor = FontColor;
@@ -83,7 +80,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
             if (currentString != "")
             {
                 var size = Font.MeasureString(currentString);
-                var newLabel = new LabelControl(_font);
+                var newLabel = new LabelControl();
                 newLabel.Font = Font;
                 newLabel.Text = currentString;
                 newLabel.FontColor = FontColor;

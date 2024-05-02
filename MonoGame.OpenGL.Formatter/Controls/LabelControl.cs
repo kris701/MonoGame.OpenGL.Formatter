@@ -28,11 +28,12 @@ namespace MonoGame.OpenGL.Formatter.Controls
 
         private readonly TextElement _element;
 
-        public LabelControl(SpriteFont font)
+        public LabelControl()
         {
-            _element = new TextElement(this, font)
+            _element = new TextElement(this)
             {
                 Text = "",
+                Font = Font,
                 FontColor = Color.White
             };
         }

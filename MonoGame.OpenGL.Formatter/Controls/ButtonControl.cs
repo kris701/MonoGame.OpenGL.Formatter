@@ -25,7 +25,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         private bool _holding = false;
         private bool _blocked = false;
 
-        public ButtonControl(IWindow parent, SpriteFont font, ClickedHandler? clicked = null) : base(font)
+        public ButtonControl(IWindow parent, ClickedHandler? clicked = null)
         {
             Parent = parent;
             Clicked += clicked;

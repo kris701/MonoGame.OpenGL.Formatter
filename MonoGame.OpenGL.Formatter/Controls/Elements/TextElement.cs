@@ -21,11 +21,13 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
             }
         }
         public Color FontColor { get; set; } = Color.White;
-        private SpriteFont _font;
+        private SpriteFont? _font = null;
         public SpriteFont Font
         {
             get
             {
+                if (_font == null)
+                    throw new Exception("Font not set!");
                 return _font;
             }
             set
@@ -41,10 +43,9 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
         internal float _textHeight = 0;
         internal bool _textChanged = true;
 
-        public TextElement(IControl parent, SpriteFont font)
+        public TextElement(IControl parent)
         {
             Parent = parent;
-            _font = font;
         }
 
         private void UpdateTextPositions()
