@@ -59,7 +59,8 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
 
         public void Initialize()
         {
-            UpdateTextPositions();
+            if (Text != "")
+                UpdateTextPositions();
         }
 
         public void Update(GameTime gameTime)
