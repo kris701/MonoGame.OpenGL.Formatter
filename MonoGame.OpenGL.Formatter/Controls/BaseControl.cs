@@ -10,6 +10,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
 
         public float Rotation { get; set; } = 0;
         public bool IsVisible { get; set; } = true;
+        public bool IsInitialized { get; set; } = false;
         public float X { get; set; }
         public float Y { get; set; }
         public float Width { get; set; }
@@ -97,6 +98,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
             ReAlign();
             if (_usesViewPort)
                 CalculateViewPort();
+            IsInitialized = true;
         }
         public virtual void Update(GameTime gameTime)
         {

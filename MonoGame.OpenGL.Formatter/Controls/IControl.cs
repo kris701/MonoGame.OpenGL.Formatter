@@ -15,6 +15,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         public VerticalAlignment VerticalAlignment { get; set; }
 
         public bool IsVisible { get; set; }
+        public bool IsInitialized { get; set; }
         public float X { get; set; }
         public float Y { get; set; }
         public float Width { get; set; }
