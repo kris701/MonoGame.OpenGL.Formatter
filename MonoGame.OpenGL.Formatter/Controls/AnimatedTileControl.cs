@@ -1,12 +1,13 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.OpenGL.Formatter.Controls.Elements;
+using MonoGame.OpenGL.Formatter.Textures;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
     public class AnimatedTileControl : TileControl
     {
-        public List<Texture2D> TileSet
+        public TextureSetDefinition TileSet
         {
             get => AnimatedElement.TileSet;
             set
@@ -24,11 +25,6 @@ namespace MonoGame.OpenGL.Formatter.Controls
         {
             get => AnimatedElement.AutoPlay;
             set => AnimatedElement.AutoPlay = value;
-        }
-        public TimeSpan FrameTime
-        {
-            get => AnimatedElement.FrameTime;
-            set => AnimatedElement.FrameTime = value;
         }
         public AnimatedTileElement AnimatedElement;
 

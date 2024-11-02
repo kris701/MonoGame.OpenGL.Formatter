@@ -26,8 +26,7 @@ namespace MonoGame.OpenGL.Formatter.Views
             {
                 Width = IWindow.BaseScreenSize.X,
                 Height = IWindow.BaseScreenSize.Y,
-                TileSet = _in.GetLoadedContent(),
-                FrameTime = TimeSpan.FromMilliseconds(_in.FrameTime),
+                TileSet = _in,
                 AutoPlay = false
             };
             _tile.AnimatedElement.OnAnimationDone += (s) =>
@@ -68,8 +67,7 @@ namespace MonoGame.OpenGL.Formatter.Views
         {
             if (_switchTo == null)
             {
-                _tile.TileSet = _out.GetLoadedContent();
-                _tile.FrameTime = TimeSpan.FromMilliseconds(_out.FrameTime);
+                _tile.TileSet = _out;
                 _tile.Frame = 0;
                 _tile.IsVisible = true;
                 _tile.Initialize();

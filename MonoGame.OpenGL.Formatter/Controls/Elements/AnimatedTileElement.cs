@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using MonoGame.OpenGL.Formatter.Textures;
 
 namespace MonoGame.OpenGL.Formatter.Controls.Elements
 {
@@ -9,10 +10,21 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
         public OnAnimationDoneHandler? OnAnimationDone;
 
         public TileControl Parent { get; set; }
-        public List<Texture2D> TileSet { get; set; } = new List<Texture2D>();
+        private TimeSpan _frameTime;
+        private List<Texture2D> _textures = new List<Texture2D>();
+        private TextureSetDefinition _tileSet = new TextureSetDefinition(Guid.Empty, 1000, new List<string>(), false);
+        public TextureSetDefinition TileSet
+        {
+            get => _tileSet;
+            set {
+                _tileSet = value;
+                _textures = _tileSet.GetLoadedContent();
+                _frameTime = TimeSpan.FromMilliseconds(_tileSet.FrameTime);
+                Initialize();
+            }
+        }
         public int Frame { get; set; } = 0;
         public bool AutoPlay { get; set; } = true;
-        public TimeSpan FrameTime { get; set; } = TimeSpan.FromMilliseconds(500);
         public bool Finished { get; set; } = false;
         private TimeSpan _currentFrameTime = TimeSpan.Zero;
 
@@ -23,27 +35,27 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
 
         public void Initialize()
         {
-            if (TileSet.Count > 0)
+            if (_textures.Count > 0)
             {
                 Frame = 0;
-                int targetW = TileSet[0].Width;
-                int targetH = TileSet[0].Height;
-                foreach (var tile in TileSet.Skip(1))
+                int targetW = _textures[0].Width;
+                int targetH = _textures[0].Height;
+                foreach (var tile in _textures.Skip(1))
                     if (tile.Width != targetW || tile.Height != targetH)
                         throw new Exception("Animated tileset must have the same size!");
 
                 if (Parent.Width == 0)
-                    Parent.Width = TileSet[0].Width;
+                    Parent.Width = _textures[0].Width;
                 if (Parent.Height == 0)
-                    Parent.Height = TileSet[0].Height;
+                    Parent.Height = _textures[0].Height;
                 Frame = 0;
-                Parent.FillColor = TileSet[0];
+                Parent.FillColor = _textures[0];
             }
         }
 
         public void Update(GameTime gameTime)
         {
-            if (TileSet.Count <= 1)
+            if (_textures.Count <= 1)
                 return;
 
             if (Finished && !AutoPlay)
@@ -51,21 +63,21 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
             else
             {
                 _currentFrameTime += gameTime.ElapsedGameTime;
-                if (_currentFrameTime >= FrameTime)
+                if (_currentFrameTime >= _frameTime)
                 {
                     Frame++;
-                    if (Frame >= TileSet.Count)
+                    if (Frame >= _textures.Count)
                     {
                         if (AutoPlay)
                             Frame = 0;
                         else
                         {
                             Finished = true;
-                            Frame = TileSet.Count - 1;
+                            Frame = _textures.Count - 1;
                         }
                         OnAnimationDone?.Invoke(Parent);
                     }
-                    Parent.FillColor = TileSet[Frame];
+                    Parent.FillColor = _textures[Frame];
                     _currentFrameTime = TimeSpan.Zero;
                 }
             }
