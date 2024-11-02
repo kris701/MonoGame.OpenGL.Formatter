@@ -12,5 +12,16 @@ namespace MonoGame.OpenGL.Formatter.Controls
         {
             Children = children;
         }
+
+        public override void Initialize()
+        {
+            foreach (var child in Children)
+            {
+                child.Y += child.Height;
+                if (child.Width == 0)
+                    child.Width = Width;
+            }
+            base.Initialize();
+        }
     }
 }
