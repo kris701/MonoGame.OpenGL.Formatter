@@ -18,17 +18,17 @@ namespace MonoGame.OpenGL.Formatter
 {
     public class BaseWindow : Game, IWindow
     {
-        public float XScale { get; private set; }
-        public float YScale { get; private set; }
+        public float XScale { get; private set; } = 1;
+        public float YScale { get; private set; } = 1;
 
         public IView CurrentScreen { get; set; }
         public List<IBackgroundWorker> BackroundWorkers { get; set; } = new List<IBackgroundWorker>();
         public AudioController Audio { get; private set; }
         public TextureController Textures { get; private set; }
         public FontController Fonts { get; private set; }
-        public bool IsActive { get; }
+        public new bool IsActive { get => IsActive; }
 
-        public GraphicsDeviceManager Device { get; private set; }
+        public GraphicsDeviceManager Device { get; }
         public ContentManager ContentManager { get; private set; }
         
         private Matrix _scaleMatrix;
@@ -39,6 +39,7 @@ namespace MonoGame.OpenGL.Formatter
         {
             ContentManager = Content;
             Device = new GraphicsDeviceManager(this);
+            UpdateScale();
         }
 
         public BaseWindow(string title) : this()
@@ -60,15 +61,14 @@ namespace MonoGame.OpenGL.Formatter
             Audio = new AudioController(ContentManager);
             Textures = new TextureController(ContentManager);
             Fonts = new FontController(ContentManager);
+
             foreach (var worker in BackroundWorkers)
                 worker.Initialize();
         }
 
         protected override void LoadContent()
         {
-            base.LoadContent();
-
-            _spriteBatch = new SpriteBatch(Device.GraphicsDevice);
+            _spriteBatch = new SpriteBatch(GraphicsDevice);
         }
 
         protected override void Update(GameTime gameTime)
@@ -81,7 +81,7 @@ namespace MonoGame.OpenGL.Formatter
 
         protected override void Draw(GameTime gameTime)
         {
-            Device.GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch!.Begin(transformMatrix: _scaleMatrix);
             CurrentScreen.Draw(gameTime, _spriteBatch);
