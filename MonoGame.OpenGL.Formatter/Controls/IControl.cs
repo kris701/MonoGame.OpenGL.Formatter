@@ -3,8 +3,11 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
-    public enum HorizontalAlignment { None, Left, Middle, Right }
-    public enum VerticalAlignment { None, Top, Middle, Bottom }
+    public enum HorizontalAlignment
+    { None, Left, Middle, Right }
+
+    public enum VerticalAlignment
+    { None, Top, Middle, Bottom }
 
     /// <summary>
     /// Basic control interface.
@@ -26,8 +29,11 @@ namespace MonoGame.OpenGL.Formatter.Controls
         public Rectangle ViewPort { get; set; }
 
         public void Initialize(); // Constructor level initialization
+
         public void Update(GameTime gameTime); // Update each frame
+
         public void Draw(GameTime gameTime, SpriteBatch spriteBatch); // Draw each frame
+
         public void OffsetFrom(IControl parent);
     }
 }

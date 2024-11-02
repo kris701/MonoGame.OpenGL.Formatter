@@ -11,16 +11,19 @@ namespace MonoGame.OpenGL.Formatter.Controls
             get => _element.Text;
             set => _element.Text = value;
         }
+
         public SpriteFont Font
         {
             get => _element.Font;
             set => _element.Font = value;
         }
+
         public Color FontColor
         {
             get => _element.FontColor;
             set => _element.FontColor = value;
         }
+
         public float TextX => _element._textX;
         public float TextY => _element._textY;
         public float TextWidth => _element._textWidth;

@@ -6,6 +6,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
     public class TextboxControl : TileControl
     {
         private string _text = "";
+
         public string Text
         {
             get
@@ -18,8 +19,10 @@ namespace MonoGame.OpenGL.Formatter.Controls
                 _textChanged = true;
             }
         }
+
         public Color FontColor { get; set; } = Color.Black;
         private SpriteFont? _font;
+
         public SpriteFont Font
         {
             get
@@ -34,6 +37,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
                 _textChanged = true;
             }
         }
+
         public float Margin { get; set; } = 5;
         internal bool _textChanged = true;
         internal List<LabelControl> lines = new List<LabelControl>();

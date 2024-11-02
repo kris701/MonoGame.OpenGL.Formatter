@@ -7,6 +7,7 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
     {
         public IControl Parent { get; }
         private string _text = "";
+
         public string Text
         {
             get
@@ -20,8 +21,10 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
                 _text = value;
             }
         }
+
         public Color FontColor { get; set; } = Color.White;
         private SpriteFont? _font = null;
+
         public SpriteFont Font
         {
             get

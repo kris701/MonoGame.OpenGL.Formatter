@@ -10,7 +10,9 @@ namespace MonoGame.OpenGL.Formatter.Views
     /// </summary>
     public abstract class BaseAnimatedView : BaseView
     {
-        public enum FadeState { AnimateIn, Hold, AnimateOut, PostHold }
+        public enum FadeState
+        { AnimateIn, Hold, AnimateOut, PostHold }
+
         public FadeState State { get; set; } = FadeState.AnimateIn;
 
         private readonly AnimatedTileControl _tile;
@@ -18,6 +20,7 @@ namespace MonoGame.OpenGL.Formatter.Views
         private readonly TextureSetDefinition _out;
 
         private IView? _switchTo;
+
         public BaseAnimatedView(IWindow parent, Guid id, TextureSetDefinition inSet, TextureSetDefinition outSet) : base(parent, id)
         {
             _in = inSet;
@@ -37,6 +40,7 @@ namespace MonoGame.OpenGL.Formatter.Views
                         State = FadeState.Hold;
                         _tile.IsVisible = false;
                         break;
+
                     case FadeState.AnimateOut:
                         State = FadeState.PostHold;
                         break;

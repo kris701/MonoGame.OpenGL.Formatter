@@ -9,7 +9,9 @@ namespace MonoGame.OpenGL.Formatter.Views
     /// </summary>
     public abstract class BaseFadeView : BaseView
     {
-        public enum FadeState { FadeIn, Hold, FadeOut, PostHold }
+        public enum FadeState
+        { FadeIn, Hold, FadeOut, PostHold }
+
         public FadeState State { get; set; } = FadeState.FadeIn;
 
         public int FadeInTime { get; set; } = 200;
@@ -46,6 +48,7 @@ namespace MonoGame.OpenGL.Formatter.Views
                         fadeValue = 0;
                     }
                     break;
+
                 case FadeState.FadeOut:
                     fadeTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
                     fadeValue = (int)(fadeTimer / FadeOutTime * 255);

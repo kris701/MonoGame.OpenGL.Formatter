@@ -33,7 +33,9 @@ namespace MonoGame.OpenGL.Formatter
             else
                 _manager = manager;
         }
+
         public abstract T LoadMethod(ContentManager manager);
+
         public void SetContent(T content) => _loadedContent = content;
     }
 }

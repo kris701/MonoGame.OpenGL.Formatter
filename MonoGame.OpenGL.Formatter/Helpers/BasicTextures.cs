@@ -6,12 +6,14 @@ namespace MonoGame.OpenGL.Formatter.Helpers
     public static class BasicTextures
     {
         private static GraphicsDevice? _graphicsDevice;
+
         public static void Initialize(GraphicsDevice graphicsDevice)
         {
             _graphicsDevice = graphicsDevice;
         }
 
         private static readonly Dictionary<Color, Texture2D> _rectangleCache = new Dictionary<Color, Texture2D>();
+
         public static Texture2D GetBasicRectange(Color target)
         {
             if (_rectangleCache.ContainsKey(target))
@@ -21,6 +23,7 @@ namespace MonoGame.OpenGL.Formatter.Helpers
             _rectangleCache.Add(target, texture);
             return texture;
         }
+
         public static Texture2D GetClickedTexture() => GetBasicRectange(new Color(64, 64, 64, 100));
 
         private class CircleKey
@@ -50,7 +53,9 @@ namespace MonoGame.OpenGL.Formatter.Helpers
                 return HashCode.Combine(Color, Radius);
             }
         }
+
         private static readonly Dictionary<CircleKey, Texture2D> _circleCache = new Dictionary<CircleKey, Texture2D>();
+
         public static Texture2D GetBasicCircle(Color target, int radius)
         {
             var key = new CircleKey(target, radius);

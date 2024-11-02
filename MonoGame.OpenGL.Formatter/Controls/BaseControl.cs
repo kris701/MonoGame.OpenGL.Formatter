@@ -17,6 +17,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         public float Height { get; set; }
         private Color _alphaColor = new Color(255, 255, 255, 255);
         private int _alpha = 255;
+
         public int Alpha
         {
             get
@@ -29,10 +30,12 @@ namespace MonoGame.OpenGL.Formatter.Controls
                 _alphaColor = new Color(value, value, value, value);
             }
         }
+
         public object? Tag { get; set; }
         private bool _usesViewPort = false;
         private Rectangle _actualViewPort;
         private Rectangle _viewPort;
+
         public Rectangle ViewPort
         {
             get
@@ -100,9 +103,11 @@ namespace MonoGame.OpenGL.Formatter.Controls
                 CalculateViewPort();
             IsInitialized = true;
         }
+
         public virtual void Update(GameTime gameTime)
         {
         }
+
         public abstract void Draw(GameTime gameTime, SpriteBatch spriteBatch);
 
         public void OffsetFrom(IControl parent)

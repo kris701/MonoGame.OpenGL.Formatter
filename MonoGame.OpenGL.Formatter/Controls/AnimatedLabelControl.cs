@@ -1,5 +1,4 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
 using MonoGame.OpenGL.Formatter.Controls.Elements;
 using MonoGame.OpenGL.Formatter.Textures;
 
@@ -16,16 +15,19 @@ namespace MonoGame.OpenGL.Formatter.Controls
                 AnimatedElement.Finished = false;
             }
         }
+
         public int Frame
         {
             get => AnimatedElement.Frame;
             set => AnimatedElement.Frame = value;
         }
+
         public bool AutoPlay
         {
             get => AnimatedElement.AutoPlay;
             set => AnimatedElement.AutoPlay = value;
         }
+
         public AnimatedTileElement AnimatedElement;
 
         public AnimatedLabelControl()

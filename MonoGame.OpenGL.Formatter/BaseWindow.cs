@@ -1,18 +1,11 @@
 ﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using MonoGame.OpenGL.Formatter.Audio;
 using MonoGame.OpenGL.Formatter.BackgroundWorkers;
 using MonoGame.OpenGL.Formatter.Fonts;
 using MonoGame.OpenGL.Formatter.Textures;
 using MonoGame.OpenGL.Formatter.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MonoGame.OpenGL.Formatter
 {
@@ -29,10 +22,10 @@ namespace MonoGame.OpenGL.Formatter
         public new bool IsActive { get => base.IsActive; }
 
         public GraphicsDeviceManager Device { get; }
-        
+
         private Matrix _scaleMatrix;
         private SpriteBatch? _spriteBatch;
-        private string? _title;
+        private readonly string? _title;
 
         public BaseWindow() : base()
         {
@@ -48,7 +41,7 @@ namespace MonoGame.OpenGL.Formatter
         protected override void Initialize()
         {
             base.Initialize();
-            
+
             if (_title != null)
             {
                 var thisVersion = Assembly.GetEntryAssembly()?.GetName().Version!;

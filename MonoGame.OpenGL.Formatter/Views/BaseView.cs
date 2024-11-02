@@ -64,7 +64,6 @@ namespace MonoGame.OpenGL.Formatter.Views
 
         public virtual void OnUpdate(GameTime gameTime)
         {
-
         }
 
         public virtual void SwitchView(IView screen)

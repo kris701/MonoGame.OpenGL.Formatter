@@ -10,15 +10,15 @@ namespace MonoGame.OpenGL.Formatter.Helpers
             int w = device.PresentationParameters.BackBufferWidth;
             int h = device.PresentationParameters.BackBufferHeight;
 
-            //force a frame to be drawn (otherwise back buffer is empty) 
+            //force a frame to be drawn (otherwise back buffer is empty)
             game.RunOneFrame();
             //game.Draw(new GameTime());
 
-            //pull the picture from the buffer 
+            //pull the picture from the buffer
             int[] backBuffer = new int[w * h];
             device.GetBackBufferData(backBuffer);
 
-            //copy into a texture 
+            //copy into a texture
             Texture2D texture = new Texture2D(device, w, h, false, device.PresentationParameters.BackBufferFormat);
             texture.SetData(backBuffer);
             return texture;

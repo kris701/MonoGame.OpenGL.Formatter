@@ -9,14 +9,17 @@ namespace MonoGame.OpenGL.Formatter.Controls
     public class ButtonControl : LabelControl
     {
         public delegate void ClickedHandler(ButtonControl parent);
+
         public event ClickedHandler? Clicked;
 
         public IWindow Parent { get; set; }
+
         public Guid ClickSound
         {
             get => _clickSoundElement.SoundEffect;
             set => _clickSoundElement.SoundEffect = value;
         }
+
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Gray);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.DarkGray);
         public bool IsEnabled { get; set; } = true;

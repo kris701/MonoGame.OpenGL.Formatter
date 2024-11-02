@@ -7,6 +7,7 @@ namespace MonoGame.OpenGL.Formatter.Controls.Elements
     public class ScrollWatcherElement
     {
         public delegate void ScrollEventHandler(int oldValue, int newValue);
+
         public event ScrollEventHandler? ScrollChanged;
 
         public IWindow Parent { get; set; }

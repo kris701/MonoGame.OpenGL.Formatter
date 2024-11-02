@@ -9,20 +9,23 @@ namespace MonoGame.OpenGL.Formatter.Controls
     public class TextInputControl : LabelControl
     {
         public delegate void KeyEventHandler(TextInputControl parent);
-        public event KeyEventHandler? OnEnter;
-        public event KeyEventHandler? OnKeyDown;
 
+        public event KeyEventHandler? OnEnter;
+
+        public event KeyEventHandler? OnKeyDown;
 
         public IWindow Parent { get; set; }
         public Texture2D FillClickedColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public Texture2D FillDisabledColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
         public bool IsEnabled { get; set; } = true;
         public int Limit { get; set; } = 0;
+
         public Guid KeyDownSound
         {
             get => _keyDownSoundElement.SoundEffect;
             set => _keyDownSoundElement.SoundEffect = value;
         }
+
         public Guid EnterSound
         {
             get => _enterSoundElement.SoundEffect;
@@ -36,6 +39,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
         private bool _holding = false;
         private bool _blocked = false;
         private bool _keyDown = false;
+
         private readonly List<Keys> _legalCharacters = new List<Keys>()
         {
             Keys.A, Keys.B, Keys.C,
@@ -52,6 +56,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
             Keys.D6, Keys.D7, Keys.D8,
             Keys.D9
         };
+
         private readonly TileControl _iBeam;
         private TimeSpan _iBeamTimer = TimeSpan.Zero;
 

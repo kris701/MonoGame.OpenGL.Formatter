@@ -12,6 +12,6 @@
 ![Static Badge](https://img.shields.io/badge/Framework-dotnet--8.0-green)
 
 # MonoGame.OpenGL.Formatter
-This is a project to provide Forms-like UI tools for MonoGame. 
+This is a project to provide Forms-like UI tools for MonoGame.
 If you want a comprehensive example of how it can be used, check out my [Bug Defenders](https://github.com/kris701/BugDefenders) game repository.
 You can find this as a packge on the [NuGet](https://www.nuget.org/packages/MonoGame.OpenGL.Formatter/) package manager.
