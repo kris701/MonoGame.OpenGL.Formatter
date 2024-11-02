@@ -26,10 +26,9 @@ namespace MonoGame.OpenGL.Formatter
         public AudioController Audio { get; private set; }
         public TextureController Textures { get; private set; }
         public FontController Fonts { get; private set; }
-        public new bool IsActive { get => IsActive; }
+        public new bool IsActive { get => base.IsActive; }
 
         public GraphicsDeviceManager Device { get; }
-        public ContentManager ContentManager { get; private set; }
         
         private Matrix _scaleMatrix;
         private SpriteBatch? _spriteBatch;
@@ -37,7 +36,6 @@ namespace MonoGame.OpenGL.Formatter
 
         public BaseWindow() : base()
         {
-            ContentManager = Content;
             Device = new GraphicsDeviceManager(this);
             UpdateScale();
         }
@@ -58,9 +56,9 @@ namespace MonoGame.OpenGL.Formatter
                 Window.Title = $"{_title} {thisVersionStr}";
             }
 
-            Audio = new AudioController(ContentManager);
-            Textures = new TextureController(ContentManager);
-            Fonts = new FontController(ContentManager);
+            Audio = new AudioController(Content);
+            Textures = new TextureController(Content);
+            Fonts = new FontController(Content);
 
             foreach (var worker in BackroundWorkers)
                 worker.Initialize();

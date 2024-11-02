@@ -25,7 +25,7 @@ namespace MonoGame.OpenGL.Formatter
         public bool IsActive { get; }
 
         public GraphicsDeviceManager Device { get; }
-        public ContentManager ContentManager { get; }
+        public ContentManager Content { get; }
 
         public void UpdateScale();
     }
