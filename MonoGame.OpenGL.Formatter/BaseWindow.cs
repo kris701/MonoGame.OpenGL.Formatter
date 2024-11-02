@@ -33,10 +33,10 @@ namespace MonoGame.OpenGL.Formatter
         private Matrix _scaleMatrix;
         private SpriteBatch? _spriteBatch;
 
-        public BaseWindow(ContentManager contentManager, GraphicsDeviceManager deviceManager)
+        public BaseWindow() : base()
         {
-            ContentManager = contentManager;
-            Device = deviceManager;
+            ContentManager = Content;
+            Device = new GraphicsDeviceManager(this);
         }
 
         protected override void Initialize()
