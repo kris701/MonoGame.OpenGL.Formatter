@@ -57,10 +57,16 @@ namespace MonoGame.OpenGL.Formatter
             _spriteBatch = new SpriteBatch(Device.GraphicsDevice);
         }
 
+        protected override void Update(GameTime gameTime)
+        {
+            CurrentScreen.Update(gameTime);
+            foreach (var worker in BackroundWorkers)
+                worker.Update(gameTime);
+            base.Update(gameTime);
+        }
+
         protected override void Draw(GameTime gameTime)
         {
-            base.Draw(gameTime);
-
             Device.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch!.Begin(transformMatrix: _scaleMatrix);
@@ -68,6 +74,8 @@ namespace MonoGame.OpenGL.Formatter
             foreach (var worker in BackroundWorkers)
                 worker.Draw(gameTime, _spriteBatch);
             _spriteBatch.End();
+
+            base.Draw(gameTime);
         }
 
         public void UpdateScale()
