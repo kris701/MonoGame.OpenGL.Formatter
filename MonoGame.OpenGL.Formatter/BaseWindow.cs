@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace MonoGame.OpenGL.Formatter
 {
-    public class BaseWindow : IWindow
+    public class BaseWindow : Game, IWindow
     {
         public float XScale { get; private set; }
         public float YScale { get; private set; }
@@ -39,8 +39,10 @@ namespace MonoGame.OpenGL.Formatter
             Device = deviceManager;
         }
 
-        public void InitializeWindow()
+        protected override void Initialize()
         {
+            base.Initialize();
+
             Audio = new AudioController(ContentManager);
             Textures = new TextureController(ContentManager);
             Fonts = new FontController(ContentManager);
@@ -48,13 +50,17 @@ namespace MonoGame.OpenGL.Formatter
                 worker.Initialize();
         }
 
-        public void LoadContentWindow()
+        protected override void LoadContent()
         {
+            base.LoadContent();
+
             _spriteBatch = new SpriteBatch(Device.GraphicsDevice);
         }
 
-        public void DrawWindow(GameTime gameTime)
+        protected override void Draw(GameTime gameTime)
         {
+            base.Draw(gameTime);
+
             Device.GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch!.Begin(transformMatrix: _scaleMatrix);

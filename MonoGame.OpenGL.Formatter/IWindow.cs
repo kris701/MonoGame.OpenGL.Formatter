@@ -27,9 +27,6 @@ namespace MonoGame.OpenGL.Formatter
         public GraphicsDeviceManager Device { get; }
         public ContentManager ContentManager { get; }
 
-        public void InitializeWindow();
-        public void LoadContentWindow();
-        public void DrawWindow(GameTime gameTime);
         public void UpdateScale();
     }
 }
