@@ -9,6 +9,7 @@ using MonoGame.OpenGL.Formatter.Views;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,6 +33,7 @@ namespace MonoGame.OpenGL.Formatter
         
         private Matrix _scaleMatrix;
         private SpriteBatch? _spriteBatch;
+        private string? _title;
 
         public BaseWindow() : base()
         {
@@ -39,9 +41,21 @@ namespace MonoGame.OpenGL.Formatter
             Device = new GraphicsDeviceManager(this);
         }
 
+        public BaseWindow(string title) : this()
+        {
+            _title = title;
+        }
+
         protected override void Initialize()
         {
             base.Initialize();
+            
+            if (_title != null)
+            {
+                var thisVersion = Assembly.GetEntryAssembly()?.GetName().Version!;
+                var thisVersionStr = $"v{thisVersion.Major}.{thisVersion.Minor}.{thisVersion.Build}";
+                Window.Title = $"{_title} {thisVersionStr}";
+            }
 
             Audio = new AudioController(ContentManager);
             Textures = new TextureController(ContentManager);
