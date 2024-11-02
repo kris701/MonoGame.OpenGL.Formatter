@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using MonoGame.OpenGL.Formatter.Audio;
 using MonoGame.OpenGL.Formatter.BackgroundWorkers;
 using MonoGame.OpenGL.Formatter.Fonts;
@@ -22,5 +23,13 @@ namespace MonoGame.OpenGL.Formatter
         public TextureController Textures { get; }
         public FontController Fonts { get; }
         public bool IsActive { get; }
+
+        public GraphicsDeviceManager Device { get; }
+        public ContentManager ContentManager { get; }
+
+        public void InitializeWindow();
+        public void LoadContentWindow();
+        public void DrawWindow(GameTime gameTime);
+        public void UpdateScale();
     }
 }
