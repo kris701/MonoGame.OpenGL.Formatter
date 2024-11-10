@@ -4,18 +4,30 @@ using Microsoft.Xna.Framework.Graphics;
 namespace MonoGame.OpenGL.Formatter.Fonts
 {
     /// <summary>
-    /// <seealso cref="IController"/> implementation for handling fonts
+    /// <seealso cref="IContentController"/> implementation for handling fonts
     /// </summary>
-    public class FontController : IController
+    public class FontController : IContentController
     {
-        public ContentManager ContentManager { get; }
+		/// <summary>
+		/// Content manager for the game
+		/// </summary>
+		public ContentManager ContentManager { get; }
+
         private readonly Dictionary<Guid, FontDefinition> _fonts = new Dictionary<Guid, FontDefinition>();
 
+        /// <summary>
+        /// Main controller
+        /// </summary>
+        /// <param name="contentManager"></param>
         public FontController(ContentManager contentManager)
         {
             ContentManager = contentManager;
         }
 
+        /// <summary>
+        /// Load a font
+        /// </summary>
+        /// <param name="item"></param>
         public void LoadFont(FontDefinition item)
         {
             if (_fonts.ContainsKey(item.ID))
@@ -24,6 +36,12 @@ namespace MonoGame.OpenGL.Formatter.Fonts
             _fonts.Add(item.ID, item);
         }
 
+        /// <summary>
+        /// Get a font based on a unique ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
         public SpriteFont GetFont(Guid id)
         {
             if (!_fonts.ContainsKey(id))

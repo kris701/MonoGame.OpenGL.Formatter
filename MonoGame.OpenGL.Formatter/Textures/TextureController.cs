@@ -6,10 +6,13 @@ using MonoGame.OpenGL.Formatter.Helpers;
 namespace MonoGame.OpenGL.Formatter.Textures
 {
     /// <summary>
-    /// <seealso cref="IController"/> implementation for handling textures
+    /// <seealso cref="IContentController"/> implementation for handling textures
     /// </summary>
-    public class TextureController : IController
+    public class TextureController : IContentController
     {
+        /// <summary>
+        /// Content manager for the game
+        /// </summary>
         public ContentManager ContentManager { get; }
 
         private readonly Dictionary<Guid, TextureDefinition> _textures = new Dictionary<Guid, TextureDefinition>();
@@ -17,11 +20,19 @@ namespace MonoGame.OpenGL.Formatter.Textures
         private Texture2D? _noTexture;
         private TextureSetDefinition? _noTextureSet;
 
+        /// <summary>
+        /// Main controller
+        /// </summary>
+        /// <param name="contentManager"></param>
         public TextureController(ContentManager contentManager)
         {
             ContentManager = contentManager;
         }
 
+        /// <summary>
+        /// Load a given texture item
+        /// </summary>
+        /// <param name="item"></param>
         public void LoadTexture(TextureDefinition item)
         {
             if (_textures.ContainsKey(item.ID))
@@ -30,6 +41,10 @@ namespace MonoGame.OpenGL.Formatter.Textures
             _textures.Add(item.ID, item);
         }
 
+        /// <summary>
+        /// Load a given texture set item
+        /// </summary>
+        /// <param name="item"></param>
         public void LoadTextureSet(TextureSetDefinition item)
         {
             if (_textureSets.ContainsKey(item.ID))
@@ -38,6 +53,11 @@ namespace MonoGame.OpenGL.Formatter.Textures
             _textureSets.Add(item.ID, item);
         }
 
+        /// <summary>
+        /// Get some loaded texture based on its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public Texture2D GetTexture(Guid id)
         {
             if (_textures.ContainsKey(id))
@@ -47,6 +67,11 @@ namespace MonoGame.OpenGL.Formatter.Textures
             return _noTexture;
         }
 
+        /// <summary>
+        /// Get some loaded texture set based on its ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public TextureSetDefinition GetTextureSet(Guid id)
         {
             if (_textureSets.ContainsKey(id))

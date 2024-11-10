@@ -3,17 +3,29 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame.OpenGL.Formatter.Helpers
 {
+    /// <summary>
+    /// A helper class to generate simple textures.
+    /// </summary>
     public static class BasicTextures
     {
         private static GraphicsDevice? _graphicsDevice;
+		private static readonly Dictionary<Color, Texture2D> _rectangleCache = new Dictionary<Color, Texture2D>();
+		private static readonly Dictionary<CircleKey, Texture2D> _circleCache = new Dictionary<CircleKey, Texture2D>();
 
-        public static void Initialize(GraphicsDevice graphicsDevice)
+		/// <summary>
+		/// Initialize this helper with the games graphics adapter
+		/// </summary>
+		/// <param name="graphicsDevice"></param>
+		public static void Initialize(GraphicsDevice graphicsDevice)
         {
             _graphicsDevice = graphicsDevice;
         }
 
-        private static readonly Dictionary<Color, Texture2D> _rectangleCache = new Dictionary<Color, Texture2D>();
-
+        /// <summary>
+        /// Get a 1x1 texture of a solid color
+        /// </summary>
+        /// <param name="target"></param>
+        /// <returns></returns>
         public static Texture2D GetBasicRectange(Color target)
         {
             if (_rectangleCache.ContainsKey(target))
@@ -24,6 +36,10 @@ namespace MonoGame.OpenGL.Formatter.Helpers
             return texture;
         }
 
+        /// <summary>
+        /// Get a "clicked" texture color, being gray with low opacity
+        /// </summary>
+        /// <returns></returns>
         public static Texture2D GetClickedTexture() => GetBasicRectange(new Color(64, 64, 64, 100));
 
         private class CircleKey
@@ -54,8 +70,12 @@ namespace MonoGame.OpenGL.Formatter.Helpers
             }
         }
 
-        private static readonly Dictionary<CircleKey, Texture2D> _circleCache = new Dictionary<CircleKey, Texture2D>();
-
+        /// <summary>
+        /// Get a filled circle of some color and radius
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="radius"></param>
+        /// <returns></returns>
         public static Texture2D GetBasicCircle(Color target, int radius)
         {
             var key = new CircleKey(target, radius);

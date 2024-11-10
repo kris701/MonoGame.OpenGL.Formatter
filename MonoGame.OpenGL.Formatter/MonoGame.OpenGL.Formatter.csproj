@@ -6,6 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
 	  <Nullable>enable</Nullable>
 	  <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
 	  <Title>MonoGame.OpenGL.Formatter</Title>
 	  <Authors>Kristian Skov Johansen</Authors>
 	  <Description>A package to make it easier to do simple UI elements in Monogame OpenGL.</Description>

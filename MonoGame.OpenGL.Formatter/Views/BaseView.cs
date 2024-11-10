@@ -4,6 +4,9 @@ using MonoGame.OpenGL.Formatter.Controls;
 
 namespace MonoGame.OpenGL.Formatter.Views
 {
+    /// <summary>
+    /// Base implementation of an <seealso cref="IView"/>
+    /// </summary>
     public abstract class BaseView : IView
     {
         public Guid ID { get; set; }

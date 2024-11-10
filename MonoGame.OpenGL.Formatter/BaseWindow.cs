@@ -9,6 +9,9 @@ using System.Reflection;
 
 namespace MonoGame.OpenGL.Formatter
 {
+    /// <summary>
+    /// A base implementation of the <seealso cref="IWindow"/> interface and <seealso cref="Game"/> class.
+    /// </summary>
     public class BaseWindow : Game, IWindow
     {
         public float XScale { get; private set; } = 1;
