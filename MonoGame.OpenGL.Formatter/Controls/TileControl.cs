@@ -4,25 +4,39 @@ using MonoGame.OpenGL.Formatter.Helpers;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
-    public class TileControl : BaseControl
-    {
-        public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
+	/// <summary>
+	/// A control that displays a texture
+	/// </summary>
+	public class TileControl : BaseControl
+	{
+		/// <summary>
+		/// The fill color of the control
+		/// </summary>
+		public Texture2D FillColor { get; set; } = BasicTextures.GetBasicRectange(Color.Transparent);
 
-        public override void Initialize()
-        {
-            if (Width == 0)
-                Width = FillColor.Width;
-            if (Height == 0)
-                Height = FillColor.Height;
-            base.Initialize();
-        }
+		/// <summary>
+		/// Initialize the control
+		/// </summary>
+		public override void Initialize()
+		{
+			if (Width == 0)
+				Width = FillColor.Width;
+			if (Height == 0)
+				Height = FillColor.Height;
+			base.Initialize();
+		}
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
+		/// <summary>
+		/// Draw the control
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="spriteBatch"></param>
+		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		{
+			if (!IsVisible)
+				return;
 
-            DrawTile(gameTime, spriteBatch, FillColor);
-        }
-    }
+			DrawTile(gameTime, spriteBatch, FillColor);
+		}
+	}
 }

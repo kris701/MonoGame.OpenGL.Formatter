@@ -2,14 +2,14 @@
 
 namespace MonoGame.OpenGL.Formatter
 {
-    /// <summary>
-    /// Base content controller interface.
-    /// </summary>
-    public interface IContentController
-    {
-        /// <summary>
-        /// Content manager for the game.
-        /// </summary>
-        public ContentManager ContentManager { get; }
-    }
+	/// <summary>
+	/// Base content controller interface.
+	/// </summary>
+	public interface IContentController
+	{
+		/// <summary>
+		/// Content manager for the game.
+		/// </summary>
+		public ContentManager ContentManager { get; }
+	}
 }

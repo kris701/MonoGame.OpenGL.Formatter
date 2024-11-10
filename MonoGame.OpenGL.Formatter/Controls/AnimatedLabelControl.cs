@@ -4,47 +4,69 @@ using MonoGame.OpenGL.Formatter.Textures;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
-    public class AnimatedLabelControl : LabelControl
-    {
-        public TextureSetDefinition TileSet
-        {
-            get => AnimatedElement.TileSet;
-            set
-            {
-                AnimatedElement.TileSet = value;
-                AnimatedElement.Finished = false;
-            }
-        }
+	/// <summary>
+	/// A version of the <seealso cref="LabelControl"/> that has an animated tile control behind it.
+	/// </summary>
+	public class AnimatedLabelControl : LabelControl
+	{
+		/// <summary>
+		/// The tileset to animate from
+		/// </summary>
+		public TextureSetDefinition TileSet
+		{
+			get => _animatedElement.TileSet;
+			set
+			{
+				_animatedElement.TileSet = value;
+				_animatedElement.Finished = false;
+			}
+		}
 
-        public int Frame
-        {
-            get => AnimatedElement.Frame;
-            set => AnimatedElement.Frame = value;
-        }
+		/// <summary>
+		/// The current fram that is being displayed
+		/// </summary>
+		public int Frame
+		{
+			get => _animatedElement.Frame;
+			set => _animatedElement.Frame = value;
+		}
 
-        public bool AutoPlay
-        {
-            get => AnimatedElement.AutoPlay;
-            set => AnimatedElement.AutoPlay = value;
-        }
+		/// <summary>
+		/// If the background should loop
+		/// </summary>
+		public bool AutoPlay
+		{
+			get => _animatedElement.AutoPlay;
+			set => _animatedElement.AutoPlay = value;
+		}
 
-        public AnimatedTileElement AnimatedElement;
+		internal AnimatedTileElement _animatedElement;
 
-        public AnimatedLabelControl()
-        {
-            AnimatedElement = new AnimatedTileElement(this);
-        }
+		/// <summary>
+		/// Main constructor
+		/// </summary>
+		public AnimatedLabelControl()
+		{
+			_animatedElement = new AnimatedTileElement(this);
+		}
 
-        public override void Initialize()
-        {
-            AnimatedElement.Initialize();
-            base.Initialize();
-        }
+		/// <summary>
+		/// Initialize this and the animated element
+		/// </summary>
+		public override void Initialize()
+		{
+			_animatedElement.Initialize();
+			base.Initialize();
+		}
 
-        public override void Update(GameTime gameTime)
-        {
-            AnimatedElement.Update(gameTime);
-            base.Update(gameTime);
-        }
-    }
+		/// <summary>
+		/// Update this and the animated element.
+		/// </summary>
+		/// <param name="gameTime"></param>
+		public override void Update(GameTime gameTime)
+		{
+			_animatedElement.Update(gameTime);
+			base.Update(gameTime);
+		}
+	}
 }

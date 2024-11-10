@@ -4,42 +4,42 @@ using MonoGame.OpenGL.Formatter.Helpers;
 
 namespace MonoGame.OpenGL.Formatter.Controls.Elements
 {
-    public class ScrollWatcherElement
-    {
-        public delegate void ScrollEventHandler(int oldValue, int newValue);
+	internal class ScrollWatcherElement
+	{
+		public delegate void ScrollEventHandler(int oldValue, int newValue);
 
-        public event ScrollEventHandler? ScrollChanged;
+		public event ScrollEventHandler? ScrollChanged;
 
-        public IWindow Parent { get; set; }
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Height { get; set; }
-        public float Width { get; set; }
-        public bool IsEnabled { get; set; } = true;
+		public IWindow Parent { get; set; }
+		public float X { get; set; }
+		public float Y { get; set; }
+		public float Height { get; set; }
+		public float Width { get; set; }
+		public bool IsEnabled { get; set; } = true;
 
-        private int _lastValue = 0;
+		private int _lastValue = 0;
 
-        public ScrollWatcherElement(IWindow parent)
-        {
-            Parent = parent;
-            var mouseState = Mouse.GetState();
-            _lastValue = mouseState.ScrollWheelValue;
-        }
+		public ScrollWatcherElement(IWindow parent)
+		{
+			Parent = parent;
+			var mouseState = Mouse.GetState();
+			_lastValue = mouseState.ScrollWheelValue;
+		}
 
-        public void Update(GameTime gameTime)
-        {
-            if (IsEnabled && Parent.IsActive && ScrollChanged != null)
-            {
-                var mouseState = Mouse.GetState();
-                var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
-                if (translatedPos.X > X && translatedPos.X < X + Width &&
-                    translatedPos.Y > Y && translatedPos.Y < Y + Height)
-                {
-                    if (mouseState.ScrollWheelValue != _lastValue)
-                        ScrollChanged.Invoke(_lastValue, mouseState.ScrollWheelValue);
-                }
-                _lastValue = mouseState.ScrollWheelValue;
-            }
-        }
-    }
+		public void Update(GameTime gameTime)
+		{
+			if (IsEnabled && Parent.IsActive && ScrollChanged != null)
+			{
+				var mouseState = Mouse.GetState();
+				var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
+				if (translatedPos.X > X && translatedPos.X < X + Width &&
+					translatedPos.Y > Y && translatedPos.Y < Y + Height)
+				{
+					if (mouseState.ScrollWheelValue != _lastValue)
+						ScrollChanged.Invoke(_lastValue, mouseState.ScrollWheelValue);
+				}
+				_lastValue = mouseState.ScrollWheelValue;
+			}
+		}
+	}
 }

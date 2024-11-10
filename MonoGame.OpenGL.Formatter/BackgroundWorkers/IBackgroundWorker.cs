@@ -3,15 +3,27 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame.OpenGL.Formatter.BackgroundWorkers
 {
-    /// <summary>
-    /// An interface for background workers.
-    /// </summary>
-    public interface IBackgroundWorker
-    {
-        public void Initialize(); // Constructor level initialization
+	/// <summary>
+	/// An interface for background workers.
+	/// </summary>
+	public interface IBackgroundWorker
+	{
+		/// <summary>
+		/// Initialize the worker
+		/// </summary>
+		public void Initialize();
 
-        public void Update(GameTime gameTime); // Update each frame
+		/// <summary>
+		/// Update the worker
+		/// </summary>
+		/// <param name="gameTime"></param>
+		public void Update(GameTime gameTime);
 
-        public void Draw(GameTime gameTime, SpriteBatch spriteBatch); // Draw each frame
-    }
+		/// <summary>
+		/// Draw the worker
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="spriteBatch"></param>
+		public void Draw(GameTime gameTime, SpriteBatch spriteBatch);
+	}
 }

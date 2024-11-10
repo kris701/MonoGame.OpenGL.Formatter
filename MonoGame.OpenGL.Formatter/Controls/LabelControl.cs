@@ -4,61 +4,100 @@ using MonoGame.OpenGL.Formatter.Controls.Elements;
 
 namespace MonoGame.OpenGL.Formatter.Controls
 {
-    public class LabelControl : TileControl
-    {
-        public string Text
-        {
-            get => _element.Text;
-            set => _element.Text = value;
-        }
+	/// <summary>
+	/// A version of a <seealso cref="TileControl"/> with a text element in it.
+	/// </summary>
+	public class LabelControl : TileControl
+	{
+		/// <summary>
+		/// The text to display
+		/// </summary>
+		public string Text
+		{
+			get => _element.Text;
+			set => _element.Text = value;
+		}
 
-        public SpriteFont Font
-        {
-            get => _element.Font;
-            set => _element.Font = value;
-        }
+		/// <summary>
+		/// The font to use
+		/// </summary>
+		public SpriteFont Font
+		{
+			get => _element.Font;
+			set => _element.Font = value;
+		}
 
-        public Color FontColor
-        {
-            get => _element.FontColor;
-            set => _element.FontColor = value;
-        }
+		/// <summary>
+		/// The color the font should be.
+		/// </summary>
+		public Color FontColor
+		{
+			get => _element.FontColor;
+			set => _element.FontColor = value;
+		}
 
-        public float TextX => _element._textX;
-        public float TextY => _element._textY;
-        public float TextWidth => _element._textWidth;
-        public float TextHeight => _element._textHeight;
+		/// <summary>
+		/// The X position of the text element
+		/// </summary>
+		public float TextX => _element._textX;
+		/// <summary>
+		/// The Y position of the text element
+		/// </summary>
+		public float TextY => _element._textY;
+		/// <summary>
+		/// The width of the text element
+		/// </summary>
+		public float TextWidth => _element._textWidth;
+		/// <summary>
+		/// The height of the text element
+		/// </summary>
+		public float TextHeight => _element._textHeight;
 
-        private readonly TextElement _element;
+		private readonly TextElement _element;
 
-        public LabelControl()
-        {
-            _element = new TextElement(this)
-            {
-                Text = "",
-                FontColor = Color.White
-            };
-        }
+		/// <summary>
+		/// Main constructor
+		/// </summary>
+		public LabelControl()
+		{
+			_element = new TextElement(this)
+			{
+				Text = "",
+				FontColor = Color.White
+			};
+		}
 
-        public override void Initialize()
-        {
-            _element.Initialize();
-            base.Initialize();
-        }
+		/// <summary>
+		/// Initialize the control
+		/// </summary>
+		public override void Initialize()
+		{
+			_element.Initialize();
+			base.Initialize();
+		}
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            _element.Update(gameTime);
-        }
+		/// <summary>
+		/// Update the control
+		/// </summary>
+		/// <param name="gameTime"></param>
+		public override void Update(GameTime gameTime)
+		{
+			base.Update(gameTime);
+			_element.Update(gameTime);
+		}
 
-        public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
-        {
-            if (!IsVisible)
-                return;
+		/// <summary>
+		/// Draw the control
+		/// </summary>
+		/// <param name="gameTime"></param>
+		/// <param name="spriteBatch"></param>
+		public override void Draw(GameTime gameTime, SpriteBatch spriteBatch)
+		{
+			if (!IsVisible)
+				return;
 
-            base.Draw(gameTime, spriteBatch);
-            _element.Draw(gameTime, spriteBatch);
-        }
-    }
+			base.Draw(gameTime, spriteBatch);
+			_element.Draw(gameTime, spriteBatch);
+		}
+	}
 }
