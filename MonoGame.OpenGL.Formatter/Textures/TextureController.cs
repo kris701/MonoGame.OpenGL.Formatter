@@ -68,6 +68,19 @@ namespace MonoGame.OpenGL.Formatter.Textures
 		}
 
 		/// <summary>
+		/// Check if a given texture ID exists
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public bool ContainsTexture(Guid id) => _textures.ContainsKey(id);
+		/// <summary>
+		/// Check if a given texture set ID exists
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public bool ContainsTextureSet(Guid id) => _textures.ContainsKey(id);
+
+		/// <summary>
 		/// Get some loaded texture set based on its ID
 		/// </summary>
 		/// <param name="id"></param>

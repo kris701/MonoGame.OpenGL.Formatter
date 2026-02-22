@@ -29,6 +29,19 @@ namespace MonoGame.OpenGL.Formatter.Audio
 		}
 
 		/// <summary>
+		/// Check if a given song ID exists
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public bool ContainsSong(Guid id) => _songs.ContainsKey(id);
+		/// <summary>
+		/// Check if a given sound effect set ID exists
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public bool ContainsSoundEffect(Guid id) => _soundEffects.ContainsKey(id);
+
+		/// <summary>
 		/// Load a song
 		/// </summary>
 		/// <param name="item"></param>

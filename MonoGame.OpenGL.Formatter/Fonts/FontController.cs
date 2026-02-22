@@ -48,5 +48,12 @@ namespace MonoGame.OpenGL.Formatter.Fonts
 				throw new Exception($"Font with ID '{id}' has not been loaded!");
 			return _fonts[id].GetLoadedContent();
 		}
+
+		/// <summary>
+		/// Check if a given font ID exists
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
+		public bool ContainsFont(Guid id) => _fonts.ContainsKey(id);
 	}
 }
