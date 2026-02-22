@@ -3,7 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace MonoGame.OpenGL.Formatter.Controls.Elements
 {
-	internal class TextElement
+	public class TextElement
 	{
 		public IControl Parent { get; }
 		private string _text = "";

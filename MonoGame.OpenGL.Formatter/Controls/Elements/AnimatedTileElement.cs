@@ -4,7 +4,7 @@ using MonoGame.OpenGL.Formatter.Textures;
 
 namespace MonoGame.OpenGL.Formatter.Controls.Elements
 {
-	internal class AnimatedTileElement
+	public class AnimatedTileElement
 	{
 		public delegate void OnAnimationDoneHandler(TileControl parent);
 

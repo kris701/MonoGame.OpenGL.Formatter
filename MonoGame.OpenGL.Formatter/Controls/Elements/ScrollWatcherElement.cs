@@ -4,7 +4,7 @@ using MonoGame.OpenGL.Formatter.Helpers;
 
 namespace MonoGame.OpenGL.Formatter.Controls.Elements
 {
-	internal class ScrollWatcherElement
+	public class ScrollWatcherElement
 	{
 		public delegate void ScrollEventHandler(int oldValue, int newValue);
 

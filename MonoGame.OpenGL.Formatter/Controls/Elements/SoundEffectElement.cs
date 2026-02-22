@@ -1,6 +1,6 @@
 ﻿namespace MonoGame.OpenGL.Formatter.Controls.Elements
 {
-	internal class SoundEffectElement
+	public class SoundEffectElement
 	{
 		public Guid SoundEffect { get; set; }
 		private readonly IWindow _parent;
