@@ -15,12 +15,22 @@ namespace MonoGame.OpenGL.Formatter.Controls
 		/// Event handler for clicks
 		/// </summary>
 		/// <param name="parent"></param>
-		public delegate void ClickedHandler(ButtonControl parent);
+		public delegate void ButtonControlHandler(ButtonControl parent);
 
 		/// <summary>
 		/// Event for click
 		/// </summary>
-		public event ClickedHandler? Clicked;
+		public event ButtonControlHandler? OnClicked;
+
+		/// <summary>
+		/// Event for the mouse entering this controls area
+		/// </summary>
+		public event ButtonControlHandler? OnEnter;
+
+		/// <summary>
+		/// Event for the mouse leaving this controls area
+		/// </summary>
+		public event ButtonControlHandler? OnLeave;
 
 		/// <summary>
 		/// The base window reference
@@ -53,15 +63,20 @@ namespace MonoGame.OpenGL.Formatter.Controls
 		private bool _holding = false;
 		private bool _blocked = false;
 
+		private bool _enterBlocked = false;
+		private bool _leaveBlocked = false;
+
 		/// <summary>
 		/// Main constructor
 		/// </summary>
 		/// <param name="parent"></param>
-		/// <param name="clicked"></param>
-		public ButtonControl(IWindow parent, ClickedHandler? clicked = null)
+		/// <param name="onClicked"></param>
+		public ButtonControl(IWindow parent, ButtonControlHandler? onClicked = null, ButtonControlHandler? onHover = null, ButtonControlHandler? onLeave = null)
 		{
 			Parent = parent;
-			Clicked += clicked;
+			OnClicked += onClicked;
+			OnEnter += onHover;
+			OnLeave += onLeave;
 			_clickSoundElement = new SoundEffectElement(parent);
 		}
 
@@ -74,7 +89,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
 				return;
 			_holding = true;
 			_clickSoundElement.Trigger();
-			Clicked?.Invoke(this);
+			OnClicked?.Invoke(this);
 		}
 
 		/// <summary>
@@ -83,19 +98,40 @@ namespace MonoGame.OpenGL.Formatter.Controls
 		/// <param name="gameTime"></param>
 		public override void Update(GameTime gameTime)
 		{
-			if (IsEnabled && IsVisible && Parent.IsActive && Clicked != null)
+			if (IsEnabled && Parent.IsActive && OnClicked != null)
 			{
 				var mouseState = Mouse.GetState();
 				var translatedPos = InputHelper.GetRelativePosition(Parent.XScale, Parent.YScale);
-				if (!_blocked && (translatedPos.X > X && translatedPos.X < X + Width &&
-					translatedPos.Y > Y && translatedPos.Y < Y + Height))
+				var isWithin = (translatedPos.X > X && translatedPos.X < X + Width &&
+					translatedPos.Y > Y && translatedPos.Y < Y + Height);
+
+				if (isWithin)
+				{
+					_leaveBlocked = false;
+					if (!_enterBlocked)
+					{
+						OnEnter?.Invoke(this);
+						_enterBlocked = true;
+					}
+				}
+				else
+				{
+					_enterBlocked = false;
+					if (!_leaveBlocked)
+					{
+						OnLeave?.Invoke(this);
+						_leaveBlocked = true;
+					}
+				}
+
+				if (!_blocked && isWithin && IsVisible)
 				{
 					if (!_holding && mouseState.LeftButton == ButtonState.Pressed)
 						_holding = true;
 					else if (_holding && mouseState.LeftButton == ButtonState.Released)
 					{
 						_clickSoundElement.Trigger();
-						Clicked?.Invoke(this);
+						OnClicked?.Invoke(this);
 						_holding = false;
 					}
 				}
@@ -108,6 +144,9 @@ namespace MonoGame.OpenGL.Formatter.Controls
 					else
 						_blocked = false;
 				}
+
+				if (!IsVisible)
+					_holding = false;
 			}
 
 			base.Update(gameTime);

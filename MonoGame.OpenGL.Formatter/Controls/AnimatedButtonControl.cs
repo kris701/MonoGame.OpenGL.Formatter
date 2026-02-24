@@ -47,7 +47,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
 		/// </summary>
 		/// <param name="parent"></param>
 		/// <param name="clicked"></param>
-		public AnimatedButtonControl(IWindow parent, ClickedHandler? clicked = null) : base(parent, clicked)
+		public AnimatedButtonControl(IWindow parent, ButtonControlHandler? clicked = null) : base(parent, clicked)
 		{
 			_animatedElement = new AnimatedTileElement(this);
 		}

@@ -41,7 +41,7 @@ namespace MonoGame.OpenGL.Formatter.Input
 					_pressAction.Invoke();
 				_isDown = true;
 			}
-			else if (_isDown && Keys.Any(state.IsKeyUp))
+			else if (_isDown && Keys.All(state.IsKeyUp))
 			{
 				if (_unpressAction != null)
 					_unpressAction.Invoke();
