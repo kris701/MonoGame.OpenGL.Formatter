@@ -9,6 +9,11 @@ namespace MonoGame.OpenGL.Formatter.Controls
 	/// </summary>
 	public class TextboxControl : TileControl
 	{
+		/// <summary>
+		/// Word wrap types
+		/// </summary>
+		public enum WordWrapTypes { None, Word, Character }
+
 		private string _text = "";
 
 		/// <summary>
@@ -26,6 +31,11 @@ namespace MonoGame.OpenGL.Formatter.Controls
 				_textChanged = true;
 			}
 		}
+
+		/// <summary>
+		/// What type of wordwrapping to use
+		/// </summary>
+		public WordWrapTypes WordWrap { get; set; } = WordWrapTypes.None;
 
 		/// <summary>
 		/// Color of the font
@@ -81,42 +91,100 @@ namespace MonoGame.OpenGL.Formatter.Controls
 
 		private void ProcessString(string str)
 		{
+			switch (WordWrap)
+			{
+				case WordWrapTypes.None:
+					ProcessNoWordWrap(str);
+					break;
+				case WordWrapTypes.Character:
+					ProcessCharacterWordWrap(str);
+					break;
+				case WordWrapTypes.Word:
+					ProcessWordWordWrap(str);
+					break;
+			}
+		}
+
+		private void ProcessNoWordWrap(string str)
+		{
 			var currentString = "";
 			foreach (var character in str)
 			{
-				currentString += character;
-				var size = Font.MeasureString(currentString);
+				var size = Font.MeasureString(currentString + character);
 				if (size.X > Width - Margin * 2)
 				{
-					var newLabel = new LabelControl();
-					newLabel.Font = Font;
-					newLabel.Text = currentString;
-					newLabel.FontColor = FontColor;
-					newLabel.X = X;
-					newLabel.Y = Y + size.Y * lines.Count + Margin;
-					newLabel.Width = Width;
-					newLabel.Height = size.Y;
+					var newLabel = CreateSubLabel(currentString);
 					if (newLabel.Y + newLabel.Height > Y + Height - Margin)
 						break;
 					lines.Add(newLabel);
-					currentString = "";
+					break;
 				}
+				currentString += character;
+			}
+		}
+
+		private void ProcessCharacterWordWrap(string str)
+		{
+			var currentString = "";
+			foreach (var character in str)
+			{
+				var size = Font.MeasureString(currentString + character);
+				if (size.X > Width - Margin * 2)
+				{
+					var newLabel = CreateSubLabel(currentString);
+					if (newLabel.Y + newLabel.Height > Y + Height - Margin)
+						break;
+					lines.Add(newLabel);
+					break;
+				}
+				currentString += character;
 			}
 			if (currentString != "")
 			{
-				var size = Font.MeasureString(currentString);
-				var newLabel = new LabelControl();
-				newLabel.Font = Font;
-				newLabel.Text = currentString;
-				newLabel.FontColor = FontColor;
-				newLabel.X = X;
-				newLabel.Y = Y + size.Y * lines.Count + Margin;
-				newLabel.Width = Width;
-				newLabel.Height = size.Y;
+				var newLabel = CreateSubLabel(currentString);
 				if (newLabel.Y + newLabel.Height > Y + Height - Margin)
 					return;
 				lines.Add(newLabel);
 			}
+		}
+
+		private void ProcessWordWordWrap(string str)
+		{
+			var currentString = "";
+			var wordSplit = str.Split(' ');
+			foreach (var word in wordSplit)
+			{
+				var size = Font.MeasureString(currentString + " " + word);
+				if (size.X > Width - Margin * 2)
+				{
+					var newLabel = CreateSubLabel(currentString);
+					if (newLabel.Y + newLabel.Height > Y + Height - Margin)
+						break;
+					lines.Add(newLabel);
+					currentString = word;
+				}
+			}
+			if (currentString != "")
+			{
+				var newLabel = CreateSubLabel(currentString);
+				if (newLabel.Y + newLabel.Height > Y + Height - Margin)
+					return;
+				lines.Add(newLabel);
+			}
+		}
+
+		private LabelControl CreateSubLabel(string str)
+		{
+			var size = Font.MeasureString(str);
+			var newLabel = new LabelControl();
+			newLabel.Font = Font;
+			newLabel.Text = str;
+			newLabel.FontColor = FontColor;
+			newLabel.X = X;
+			newLabel.Y = Y + size.Y * lines.Count + Margin;
+			newLabel.Width = Width;
+			newLabel.Height = size.Y;
+			return newLabel;
 		}
 
 		/// <summary>
