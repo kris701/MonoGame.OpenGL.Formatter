@@ -117,7 +117,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
 					if (newLabel.Y + newLabel.Height > Y + Height - Margin)
 						break;
 					lines.Add(newLabel);
-					break;
+					break; // just trim the rest of the string
 				}
 				currentString += character;
 			}
@@ -135,7 +135,7 @@ namespace MonoGame.OpenGL.Formatter.Controls
 					if (newLabel.Y + newLabel.Height > Y + Height - Margin)
 						break;
 					lines.Add(newLabel);
-					break;
+					currentString = "";
 				}
 				currentString += character;
 			}
@@ -161,8 +161,9 @@ namespace MonoGame.OpenGL.Formatter.Controls
 					if (newLabel.Y + newLabel.Height > Y + Height - Margin)
 						break;
 					lines.Add(newLabel);
-					currentString = word;
+					currentString = "";
 				}
+				currentString += " " + word;
 			}
 			if (currentString != "")
 			{
