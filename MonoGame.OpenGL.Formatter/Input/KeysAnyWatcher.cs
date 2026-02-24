@@ -5,7 +5,7 @@ namespace MonoGame.OpenGL.Formatter.Input
 	/// <summary>
 	/// An input watcher that listens for a set of keys
 	/// </summary>
-	public class KeysWatcher
+	public class KeysAnyWatcher
 	{
 		/// <summary>
 		/// List of keys to listen to
@@ -22,7 +22,7 @@ namespace MonoGame.OpenGL.Formatter.Input
 		/// <param name="keys"></param>
 		/// <param name="pressAction"></param>
 		/// <param name="unpresAction"></param>
-		public KeysWatcher(List<Keys> keys, Action? pressAction = null, Action? unpresAction = null)
+		public KeysAnyWatcher(List<Keys> keys, Action? pressAction = null, Action? unpresAction = null)
 		{
 			Keys = keys;
 			_pressAction = pressAction;
@@ -35,7 +35,7 @@ namespace MonoGame.OpenGL.Formatter.Input
 		/// <param name="state"></param>
 		public void Update(KeyboardState state)
 		{
-			if (!_isDown && Keys.All(state.IsKeyDown))
+			if (!_isDown && Keys.Any(state.IsKeyDown))
 			{
 				if (_pressAction != null)
 					_pressAction.Invoke();
