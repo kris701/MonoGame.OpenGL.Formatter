@@ -33,8 +33,9 @@ namespace FormMatter.OpenGL.Input
 		/// Update the key watchers.
 		/// </summary>
 		/// <param name="state"></param>
-		public void Update(KeyboardState state)
+		public void Update()
 		{
+			var state = Keyboard.GetState();
 			if (!_isDown && Keys.All(state.IsKeyDown))
 			{
 				if (_pressAction != null)

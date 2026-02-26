@@ -32,9 +32,9 @@ namespace FormMatter.OpenGL.Input
 		/// <summary>
 		/// Update this key listener.
 		/// </summary>
-		/// <param name="state"></param>
-		public void Update(KeyboardState state)
+		public void Update()
 		{
+			var state = Keyboard.GetState();
 			if (!_isDown && state.IsKeyDown(Key))
 			{
 				if (_pressAction != null)

@@ -36,7 +36,6 @@ namespace FormMatter.OpenGL.Input
 		/// <summary>
 		/// Update this key listener.
 		/// </summary>
-		/// <param name="state"></param>
 		public void Update()
 		{
 			var state = GamePad.GetState(PlayerIndex);
