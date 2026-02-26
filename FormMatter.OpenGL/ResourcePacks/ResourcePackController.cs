@@ -7,23 +7,61 @@ using System.Text.Json;
 
 namespace FormMatter.OpenGL.ResourcePacks
 {
+	/// <summary>
+	/// Event that fired when the pack tries to load mods
+	/// </summary>
+	/// <param name="folder"></param>
 	public delegate void ResourcePackOnLoadModEventHandler(DirectoryInfo folder);
 
+	/// <summary>
+	/// Controlls to dynamically load texture, font, sound and music resources
+	/// </summary>
 	public class ResourcePackController
 	{
+		/// <summary>
+		/// Event that fired when the pack tries to load mods
+		/// </summary>
 		public ResourcePackOnLoadModEventHandler? OnLoadMod;
-		public IWindow Parent { get; }
+
+		/// <summary>
+		/// Builder to handle all the resource packs
+		/// </summary>
 		public ResourceBuilder<ResourcePackDefinition> ResourcePacks = new ResourceBuilder<ResourcePackDefinition>("ResourcePacks", Assembly.GetExecutingAssembly());
 
-		public ResourcePackController(IWindow parent)
+		private readonly AudioController _audio;
+		private readonly TextureController _textures;
+		private readonly FontController _fonts;
+
+		/// <summary>
+		/// Main constructor
+		/// </summary>
+		/// <param name="audio"></param>
+		/// <param name="textures"></param>
+		/// <param name="fonts"></param>
+		public ResourcePackController(AudioController audio, TextureController textures, FontController fonts)
 		{
-			Parent = parent;
+			_audio = audio;
+			_textures = textures;
+			_fonts = fonts;
 		}
 
+		/// <summary>
+		/// Get all resource pack IDs
+		/// </summary>
+		/// <returns></returns>
 		public List<Guid> GetResourcePacks() => ResourcePacks.GetResources();
 
+		/// <summary>
+		/// Get a resource pack by ID
+		/// </summary>
+		/// <param name="id"></param>
+		/// <returns></returns>
 		public ResourcePackDefinition GetResourcePack(Guid id) => ResourcePacks.GetResource(id);
 
+		/// <summary>
+		/// Load resources from a given pack ID
+		/// </summary>
+		/// <param name="texturePack"></param>
 		public void LoadResourcePack(Guid texturePack)
 		{
 			LoadResourcePack(ResourcePacks.GetResource(texturePack));
@@ -34,17 +72,21 @@ namespace FormMatter.OpenGL.ResourcePacks
 			if (pack.BasedOn != null)
 				LoadResourcePack(ResourcePacks.GetResource((Guid)pack.BasedOn));
 			foreach (var item in pack.Textures)
-				Parent.Textures.LoadTexture(item);
+				_textures.LoadTexture(item);
 			foreach (var item in pack.TextureSets)
-				Parent.Textures.LoadTextureSet(item);
+				_textures.LoadTextureSet(item);
 			foreach (var item in pack.Songs)
-				Parent.Audio.LoadSong(item);
+				_audio.LoadSong(item);
 			foreach (var item in pack.SoundEffects)
-				Parent.Audio.LoadSoundEffect(item);
+				_audio.LoadSoundEffect(item);
 			foreach (var item in pack.Fonts)
-				Parent.Fonts.LoadFont(item);
+				_fonts.LoadFont(item);
 		}
 
+		/// <summary>
+		/// Load mods from a given folder
+		/// </summary>
+		/// <param name="path"></param>
 		public void LoadMods(string path)
 		{
 			foreach (var folder in new DirectoryInfo(path).GetDirectories())
@@ -64,8 +106,8 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var texture in textureDef)
 								{
-									texture.Content = Path.Combine(subFolder.Parent.FullName, "Content", texture.Content);
-									Parent.Textures.LoadTexture(texture);
+									texture.Content = Path.Combine(subFolder.FullName, "Content", texture.Content);
+									_textures.LoadTexture(texture);
 								}
 							}
 						}
@@ -80,9 +122,9 @@ namespace FormMatter.OpenGL.ResourcePacks
 								foreach (var textureSet in textureSetDef)
 								{
 									for (int i = 0; i < textureSet.Contents.Count; i++)
-										textureSet.Contents[i] = Path.Combine(subFolder.Parent.FullName, "Content", textureSet.Contents[i]);
+										textureSet.Contents[i] = Path.Combine(subFolder.FullName, "Content", textureSet.Contents[i]);
 									foreach (var content in textureSet.Contents)
-										Parent.Textures.LoadTextureSet(textureSet);
+										_textures.LoadTextureSet(textureSet);
 								}
 							}
 						}
@@ -96,8 +138,8 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var song in songsDef)
 								{
-									song.Content = Path.Combine(subFolder.Parent.FullName, "Content", song.Content);
-									Parent.Audio.LoadSong(song);
+									song.Content = Path.Combine(subFolder.FullName, "Content", song.Content);
+									_audio.LoadSong(song);
 								}
 							}
 						}
@@ -111,8 +153,8 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var font in fontDef)
 								{
-									font.Content = Path.Combine(subFolder.Parent.FullName, "Content", font.Content);
-									Parent.Fonts.LoadFont(font);
+									font.Content = Path.Combine(subFolder.FullName, "Content", font.Content);
+									_fonts.LoadFont(font);
 								}
 							}
 						}
@@ -126,8 +168,8 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var soundEffect in soundEffectsDef)
 								{
-									soundEffect.Content = Path.Combine(subFolder.Parent.FullName, "Content", soundEffect.Content);
-									Parent.Audio.LoadSoundEffect(soundEffect);
+									soundEffect.Content = Path.Combine(subFolder.FullName, "Content", soundEffect.Content);
+									_audio.LoadSoundEffect(soundEffect);
 								}
 							}
 						}

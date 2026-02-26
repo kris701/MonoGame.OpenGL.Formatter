@@ -1,6 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FormMatter.OpenGL.Controls;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using FormMatter.OpenGL.Controls;
 
 namespace FormMatter.OpenGL.Views
 {

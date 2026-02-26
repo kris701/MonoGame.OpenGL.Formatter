@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FormMatter.OpenGL.Controls.Elements;
+using FormMatter.OpenGL.Helpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using FormMatter.OpenGL.Controls.Elements;
-using FormMatter.OpenGL.Helpers;
-using FormMatter.OpenGL.Helpers;
 
 namespace FormMatter.OpenGL.Controls
 {

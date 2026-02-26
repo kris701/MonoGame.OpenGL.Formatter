@@ -1,10 +1,11 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
-using FormMatter.OpenGL.Audio;
+﻿using FormMatter.OpenGL.Audio;
 using FormMatter.OpenGL.BackgroundWorkers;
 using FormMatter.OpenGL.Fonts;
+using FormMatter.OpenGL.ResourcePacks;
 using FormMatter.OpenGL.Textures;
 using FormMatter.OpenGL.Views;
+using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 
 namespace FormMatter.OpenGL
 {
@@ -46,6 +47,10 @@ namespace FormMatter.OpenGL
 		/// Main font controller to load and use textures.
 		/// </summary>
 		public FontController Fonts { get; }
+		/// <summary>
+		/// Main resource pack controller to load resources with
+		/// </summary>
+		public ResourcePackController ResourcePacks { get; }
 		/// <summary>
 		/// Boolean describing if the current window is active or not.
 		/// </summary>

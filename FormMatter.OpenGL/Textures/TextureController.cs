@@ -1,8 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using FormMatter.OpenGL.Helpers;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
-using FormMatter.OpenGL.Helpers;
-using FormMatter.OpenGL.Helpers;
 
 namespace FormMatter.OpenGL.Textures
 {
