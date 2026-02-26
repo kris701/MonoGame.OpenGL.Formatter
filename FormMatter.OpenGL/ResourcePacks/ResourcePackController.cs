@@ -26,7 +26,7 @@ namespace FormMatter.OpenGL.ResourcePacks
 		/// <summary>
 		/// Builder to handle all the resource packs
 		/// </summary>
-		public ResourceBuilder<ResourcePackDefinition> ResourcePacks = new ResourceBuilder<ResourcePackDefinition>("ResourcePacks", Assembly.GetExecutingAssembly());
+		public ResourceBuilder<ResourcePackDefinition> ResourcePacks = new ResourceBuilder<ResourcePackDefinition>("ResourcePacks", Assembly.GetEntryAssembly());
 
 		private readonly AudioController _audio;
 		private readonly TextureController _textures;
