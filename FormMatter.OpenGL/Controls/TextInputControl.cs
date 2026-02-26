@@ -9,7 +9,7 @@ namespace FormMatter.OpenGL.Controls
 	/// <summary>
 	/// A version of <seealso cref="LabelControl"/> with a modifiable text element.
 	/// </summary>
-	public class TextInputControl : LabelControl
+	public class TextInputControl : LabelControl, IFocusable
 	{
 		/// <summary>
 		/// Event handler for key press

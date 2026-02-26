@@ -9,7 +9,7 @@ namespace FormMatter.OpenGL.Controls
 	/// <summary>
 	/// A <seealso cref="LabelControl"/> with a "clickable" element to it.
 	/// </summary>
-	public class ButtonControl : LabelControl
+	public class ButtonControl : LabelControl, IFocusable
 	{
 		/// <summary>
 		/// Event handler for clicks
