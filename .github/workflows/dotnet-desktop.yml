@@ -6,66 +6,65 @@ on:
       - main
 
 jobs:
-  BuildAndTest:
+  check-tag:
+    name: Check if version is new
     runs-on: ubuntu-latest
-    name: Run Tests
+    outputs: 
+        releaseExists: ${{ steps.check-tag.outputs.exists }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@master
+      - uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: dotnet restore
+      - name: Get Project version
+        id: get-version
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        with:
+          proj-path: MonoGame.Formatter.OpenGL/MonoGame.Formatter.OpenGL.csproj
 
-      - name: Build
-        run: dotnet build --configuration Release --no-restore
+      - uses: mukunku/tag-exists-action@v1.6.0
+        id: check-tag
+        with: 
+          tag: 'v${{ steps.get-version.outputs.package-version }}'
 
-      - name: Test
-        run: dotnet test --no-restore --verbosity detailed
-  BuildAndPublish:
-    needs: BuildAndTest
+  createRelease:
     runs-on: ubuntu-latest
-    name: Update NuGet 
+    name: Create new Release
+    needs: check-tag
+    if: needs.check-tag.outputs.releaseExists == 'false'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
           
       - name: Install dependencies
         run: dotnet restore
-        
-      - name: Build (Release) and Publish (MonoGame.Formatter.Builders)
+
+      - name: Add NuGet Source
+        run: | 
+          dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
+
+      - name: Build (Release) and Publish [MonoGame.Formatter.Builders]
         run: |  
           cd MonoGame.Formatter.Builders
-          dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
           dotnet build --configuration Release
           dotnet pack --configuration Release
           cd bin
           cd Release
           dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_GITHUB }} --source "github" --skip-duplicate
           dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_NUGET }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
-          cd ..
-          cd ..
+          cd ../../..
 
-      - name: Build (Release) and Publish (MonoGame.Formatter.OpenGL)
+      - name: Build (Release) and Publish [MonoGame.Formatter.OpenGL]
         run: |  
           cd MonoGame.Formatter.OpenGL
-          dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
           dotnet build --configuration Release
           dotnet pack --configuration Release
           cd bin
           cd Release
           dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_GITHUB }} --source "github" --skip-duplicate
           dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_NUGET }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
-          cd ..
-          cd ..
-
-      - name: Get Package version (MonoGame.Formatter.Builders)
-        id: get-version-builders
-        uses: kzrnm/get-net-sdk-project-versions-action@v1
-        with:
-          proj-path: MonoGame.Formatter.Builders/MonoGame.Formatter.Builders.csproj
-
-      - name: Get Package version (MonoGame.Formatter.OpenGL)
-        id: get-version-opengl
+          cd ../../..
+          
+      - name: Get Package version
+        id: get-version
         uses: kzrnm/get-net-sdk-project-versions-action@v1
         with:
           proj-path: MonoGame.Formatter.OpenGL/MonoGame.Formatter.OpenGL.csproj
@@ -82,6 +81,20 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: true
-          artifacts: "MonoGame.Formatter.OpenGL/bin/Release/*.nupkg"
+          artifacts: "*/bin/Release/*.nupkg"
           tag: "v${{ steps.get-version.outputs.package-version }}"
 
+  testBuild:
+    runs-on: ubuntu-latest
+    name: Build
+    needs: check-tag
+    if: needs.check-tag.outputs.releaseExists == 'true'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@master
+
+      - name: Install dependencies
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release --no-restore
