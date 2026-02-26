@@ -32,7 +32,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -64,7 +64,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -96,7 +96,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -128,7 +128,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
