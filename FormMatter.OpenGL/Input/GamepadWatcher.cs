@@ -45,7 +45,7 @@ namespace FormMatter.OpenGL.Input
 					_pressAction.Invoke();
 				_isDown = true;
 			}
-			else if (_isDown && state.IsButtonDown(Button))
+			else if (_isDown && state.IsButtonUp(Button))
 			{
 				if (_unpressAction != null)
 					_unpressAction.Invoke();
