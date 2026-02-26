@@ -82,5 +82,17 @@ namespace FormMatter.OpenGL.Controls
 			foreach (var child in Children)
 				child.Draw(gameTime, spriteBatch);
 		}
+
+		/// <summary>
+		/// Get all controls in this control, including itself
+		/// </summary>
+		/// <returns></returns>
+		public override List<IControl> GetAll()
+		{
+			var list = new List<IControl>();
+			foreach (var control in Children)
+				list.AddRange(control.GetAll());
+			return list;
+		}
 	}
 }

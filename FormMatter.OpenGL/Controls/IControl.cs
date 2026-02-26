@@ -93,5 +93,11 @@ namespace FormMatter.OpenGL.Controls
 		/// </summary>
 		/// <param name="parent"></param>
 		public void OffsetFrom(IControl parent);
+
+		/// <summary>
+		/// Get all controls in this control, including itself
+		/// </summary>
+		/// <returns></returns>
+		public List<IControl> GetAll();
 	}
 }

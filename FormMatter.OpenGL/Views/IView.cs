@@ -68,5 +68,12 @@ namespace FormMatter.OpenGL.Views
 		/// </summary>
 		/// <param name="screen"></param>
 		public void SwitchView(IView screen);
+
+		/// <summary>
+		/// Get all controls in a layer
+		/// </summary>
+		/// <param name="layer"></param>
+		/// <returns></returns>
+		public List<IControl> GetAll(int layer);
 	}
 }

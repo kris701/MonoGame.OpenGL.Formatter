@@ -236,5 +236,11 @@ namespace FormMatter.OpenGL.Controls
 						0);
 			}
 		}
+
+		/// <summary>
+		/// Get all controls in this control, including itself
+		/// </summary>
+		/// <returns></returns>
+		public virtual List<IControl> GetAll() => new List<IControl>() { this };
 	}
 }

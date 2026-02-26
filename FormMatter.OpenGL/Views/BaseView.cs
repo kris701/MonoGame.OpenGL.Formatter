@@ -73,5 +73,15 @@ namespace FormMatter.OpenGL.Views
 		{
 			Parent.CurrentScreen = screen;
 		}
+
+		public List<IControl> GetAll(int layer)
+		{
+			if (!_viewLayers.ContainsKey(layer))
+				return new List<IControl>();
+			var controls = new List<IControl>();
+			foreach (var item in _viewLayers[layer])
+				controls.AddRange(item.GetAll());
+			return controls;
+		}
 	}
 }
