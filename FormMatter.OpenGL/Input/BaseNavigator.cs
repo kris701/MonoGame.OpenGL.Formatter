@@ -22,7 +22,7 @@ namespace FormMatter.OpenGL.Input
 		/// <summary>
 		/// The currently focused element
 		/// </summary>
-		public IControl? Focused { get; private set; } = null;
+		public IControl? Focused { get; set; } = null;
 
 		internal bool Left(IView view)
 		{
