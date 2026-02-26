@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Interface for focusable controls
 	/// </summary>
-	public interface IFocusable
+	public interface IFocusable : IControl
 	{
 		/// <summary>
 		/// Is the control enabled?

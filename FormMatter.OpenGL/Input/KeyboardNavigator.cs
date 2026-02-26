@@ -121,9 +121,11 @@ namespace FormMatter.OpenGL.Input
 			{
 				if (!_keyDown)
 				{
-					OnAnyKeyDown?.Invoke();
-					OnLeftKeyDown?.Invoke();
-					Left(_view);
+					if (Left(_view))
+					{
+						OnAnyKeyDown?.Invoke();
+						OnLeftKeyDown?.Invoke();
+					}
 				}
 				_keyDown = true;
 			}
@@ -131,9 +133,11 @@ namespace FormMatter.OpenGL.Input
 			{
 				if (!_keyDown)
 				{
-					OnAnyKeyDown?.Invoke();
-					OnRightKeyDown?.Invoke();
-					Right(_view);
+					if (Right(_view))
+					{
+						OnAnyKeyDown?.Invoke();
+						OnRightKeyDown?.Invoke();
+					}
 				}
 				_keyDown = true;
 			}
@@ -141,9 +145,11 @@ namespace FormMatter.OpenGL.Input
 			{
 				if (!_keyDown)
 				{
-					OnAnyKeyDown?.Invoke();
-					OnUpKeyDown?.Invoke();
-					Up(_view);
+					if (Up(_view))
+					{
+						OnAnyKeyDown?.Invoke();
+						OnUpKeyDown?.Invoke();
+					}
 				}
 				_keyDown = true;
 			}
@@ -151,9 +157,11 @@ namespace FormMatter.OpenGL.Input
 			{
 				if (!_keyDown)
 				{
-					OnAnyKeyDown?.Invoke();
-					OnDownKeyDown?.Invoke();
-					Down(_view);
+					if (Down(_view))
+					{
+						OnAnyKeyDown?.Invoke();
+						OnDownKeyDown?.Invoke();
+					}
 				}
 				_keyDown = true;
 			}

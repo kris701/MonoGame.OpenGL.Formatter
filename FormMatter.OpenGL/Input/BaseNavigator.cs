@@ -24,7 +24,7 @@ namespace FormMatter.OpenGL.Input
 		/// </summary>
 		public IControl? Focused { get; private set; } = null;
 
-		internal void Left(IView view)
+		internal bool Left(IView view)
 		{
 			IControl? any = null;
 			var currentX = Focused == null ? 0 : Focused.X;
@@ -32,7 +32,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -53,10 +53,12 @@ namespace FormMatter.OpenGL.Input
 			{
 				Focused = any;
 				UpdateFocusedPosition();
+				return true;
 			}
+			return false;
 		}
 
-		internal void Right(IView view)
+		internal bool Right(IView view)
 		{
 			IControl? any = null;
 			var currentX = Focused == null ? 0 : Focused.X;
@@ -64,7 +66,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -85,10 +87,12 @@ namespace FormMatter.OpenGL.Input
 			{
 				Focused = any;
 				UpdateFocusedPosition();
+				return true;
 			}
+			return false;
 		}
 
-		internal void Up(IView view)
+		internal bool Up(IView view)
 		{
 			IControl? any = null;
 			var currentX = Focused == null ? 0 : Focused.X;
@@ -96,7 +100,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -117,10 +121,12 @@ namespace FormMatter.OpenGL.Input
 			{
 				Focused = any;
 				UpdateFocusedPosition();
+				return true;
 			}
+			return false;
 		}
 
-		internal void Down(IView view)
+		internal bool Down(IView view)
 		{
 			IControl? any = null;
 			var currentX = Focused == null ? 0 : Focused.X;
@@ -128,7 +134,7 @@ namespace FormMatter.OpenGL.Input
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
-				var controls = view.GetAll(layer).Where(x => x is IFocusable).Where(x => x.IsVisible);
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
 					if (control == any || control == Focused || control == Selector)
@@ -149,7 +155,9 @@ namespace FormMatter.OpenGL.Input
 			{
 				Focused = any;
 				UpdateFocusedPosition();
+				return true;
 			}
+			return false;
 		}
 
 		private void UpdateFocusedPosition()
