@@ -18,7 +18,7 @@ jobs:
         id: get-version
         uses: kzrnm/get-net-sdk-project-versions-action@v1
         with:
-          proj-path: MonoGame.Formatter.OpenGL/MonoGame.Formatter.OpenGL.csproj
+          proj-path: MonoGame.FormMatter.OpenGL/MonoGame.FormMatter.OpenGL.csproj
 
       - uses: mukunku/tag-exists-action@v1.6.0
         id: check-tag
@@ -41,9 +41,9 @@ jobs:
         run: | 
           dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
 
-      - name: Build (Release) and Publish [MonoGame.Formatter.Builders]
+      - name: Build (Release) and Publish [MonoGame.FormMatter.Builders]
         run: |  
-          cd MonoGame.Formatter.Builders
+          cd MonoGame.FormMatter.Builders
           dotnet build --configuration Release
           dotnet pack --configuration Release
           cd bin
@@ -52,9 +52,9 @@ jobs:
           dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_NUGET }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
           cd ../../..
 
-      - name: Build (Release) and Publish [MonoGame.Formatter.OpenGL]
+      - name: Build (Release) and Publish [MonoGame.FormMatter.OpenGL]
         run: |  
-          cd MonoGame.Formatter.OpenGL
+          cd MonoGame.FormMatter.OpenGL
           dotnet build --configuration Release
           dotnet pack --configuration Release
           cd bin
@@ -67,7 +67,7 @@ jobs:
         id: get-version
         uses: kzrnm/get-net-sdk-project-versions-action@v1
         with:
-          proj-path: MonoGame.Formatter.OpenGL/MonoGame.Formatter.OpenGL.csproj
+          proj-path: MonoGame.FormMatter.OpenGL/MonoGame.FormMatter.OpenGL.csproj
 
       - name: Generate tag
         continue-on-error: true
