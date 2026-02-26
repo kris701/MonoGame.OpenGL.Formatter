@@ -31,10 +31,10 @@ jobs:
           
       - name: Install dependencies
         run: dotnet restore
-
-      - name: Build (Release) and Publish
+        
+      - name: Build (Release) and Publish (MonoGame.Formatter.Builders)
         run: |  
-          cd MonoGame.OpenGL.Formatter
+          cd MonoGame.Formatter.Builders
           dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
           dotnet build --configuration Release
           dotnet pack --configuration Release
@@ -45,11 +45,30 @@ jobs:
           cd ..
           cd ..
 
-      - name: Get Package version
-        id: get-version
+      - name: Build (Release) and Publish (MonoGame.Formatter.OpenGL)
+        run: |  
+          cd MonoGame.Formatter.OpenGL
+          dotnet nuget add source --username kris701 --password ${{ secrets.API_KEY_GITHUB }} --store-password-in-clear-text --name github "https://nuget.pkg.github.com/kris701/index.json"
+          dotnet build --configuration Release
+          dotnet pack --configuration Release
+          cd bin
+          cd Release
+          dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_GITHUB }} --source "github" --skip-duplicate
+          dotnet nuget push "*.nupkg" --api-key ${{ secrets.API_KEY_NUGET }} --source "https://api.nuget.org/v3/index.json" --skip-duplicate
+          cd ..
+          cd ..
+
+      - name: Get Package version (MonoGame.Formatter.Builders)
+        id: get-version-builders
         uses: kzrnm/get-net-sdk-project-versions-action@v1
         with:
-          proj-path: MonoGame.OpenGL.Formatter/MonoGame.OpenGL.Formatter.csproj
+          proj-path: MonoGame.Formatter.Builders/MonoGame.Formatter.Builders.csproj
+
+      - name: Get Package version (MonoGame.Formatter.OpenGL)
+        id: get-version-opengl
+        uses: kzrnm/get-net-sdk-project-versions-action@v1
+        with:
+          proj-path: MonoGame.Formatter.OpenGL/MonoGame.Formatter.OpenGL.csproj
 
       - name: Generate tag
         continue-on-error: true
@@ -63,6 +82,6 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           skipIfReleaseExists: true
-          artifacts: "MonoGame.OpenGL.Formatter/bin/Release/*.nupkg"
+          artifacts: "MonoGame.Formatter.OpenGL/bin/Release/*.nupkg"
           tag: "v${{ steps.get-version.outputs.package-version }}"
 
