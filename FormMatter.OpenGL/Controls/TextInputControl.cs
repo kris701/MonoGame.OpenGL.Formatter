@@ -249,5 +249,13 @@ namespace FormMatter.OpenGL.Controls
 			_iBeam.Update(gameTime);
 			base.Update(gameTime);
 		}
+
+		/// <summary>
+		/// Focus this control
+		/// </summary>
+		public void Focus()
+		{
+			_captured = true;
+		}
 	}
 }
