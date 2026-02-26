@@ -15,16 +15,32 @@ namespace MonoGame.OpenGL.Formatter.Controls
 
 		private bool _visibilityChanged = true;
 
+		private Dictionary<int, float> _initialXOffsets = new Dictionary<int, float>();
+		private Dictionary<int, float> _initialYOffsets = new Dictionary<int, float>();
+
 		/// <summary>
 		/// Initialize the position and visibility of each child control within this control
 		/// </summary>
 		public override void Initialize()
 		{
 			base.Initialize();
+
+			var index = 0;
 			foreach (var child in Children)
 			{
+				if (!_initialXOffsets.ContainsKey(index))
+					_initialXOffsets.Add(index, child.X);
+				else
+					child.X = _initialXOffsets[index];
+				if (!_initialYOffsets.ContainsKey(index))
+					_initialYOffsets.Add(index, child.Y);
+				else
+					child.Y = _initialYOffsets[index];
+
 				child.OffsetFrom(this);
 				child.Initialize();
+
+				index++;
 			}
 			UpdateVisibility();
 		}
