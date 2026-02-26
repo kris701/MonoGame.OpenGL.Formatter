@@ -60,6 +60,11 @@ namespace FormMatter.OpenGL.Input
 		/// </summary>
 		public GamepadNavigatorOnInputEventHandler? OnEnterKeyDown;
 
+		/// <summary>
+		/// Index of what controller to use
+		/// </summary>
+		public int PlayerIndex { get; set; } = 0;
+
 		private readonly IView _view;
 		private bool _keyDown = false;
 
@@ -116,7 +121,7 @@ namespace FormMatter.OpenGL.Input
 		/// </summary>
 		public void Update()
 		{
-			var gamepadState = GamePad.GetState(0);
+			var gamepadState = GamePad.GetState(PlayerIndex);
 			if (LeftKeys.Any(x => gamepadState.IsButtonDown(x)))
 			{
 				if (!_keyDown)
