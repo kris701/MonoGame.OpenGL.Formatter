@@ -2,11 +2,8 @@
 using FormMatter.OpenGL.Audio;
 using FormMatter.OpenGL.Fonts;
 using FormMatter.OpenGL.Textures;
-using Microsoft.Xna.Framework.Graphics;
-using Microsoft.Xna.Framework.Media;
 using System.Reflection;
 using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace FormMatter.OpenGL.ResourcePacks
 {
