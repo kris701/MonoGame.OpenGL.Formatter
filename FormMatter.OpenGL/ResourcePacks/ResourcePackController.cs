@@ -106,7 +106,7 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var texture in textureDef)
 								{
-									texture.Content = Path.Combine(subFolder.FullName, "Content", texture.Content);
+									texture.Content = Path.Combine(path, subFolder.Name, "Content", texture.Content);
 									_textures.LoadTexture(texture);
 								}
 							}
@@ -122,7 +122,7 @@ namespace FormMatter.OpenGL.ResourcePacks
 								foreach (var textureSet in textureSetDef)
 								{
 									for (int i = 0; i < textureSet.Contents.Count; i++)
-										textureSet.Contents[i] = Path.Combine(subFolder.FullName, "Content", textureSet.Contents[i]);
+										textureSet.Contents[i] = Path.Combine(path, subFolder.Name, "Content", textureSet.Contents[i]);
 									foreach (var content in textureSet.Contents)
 										_textures.LoadTextureSet(textureSet);
 								}
@@ -138,7 +138,7 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var song in songsDef)
 								{
-									song.Content = Path.Combine(subFolder.FullName, "Content", song.Content);
+									song.Content = Path.Combine(path, subFolder.Name, "Content", song.Content);
 									_audio.LoadSong(song);
 								}
 							}
@@ -153,7 +153,7 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var font in fontDef)
 								{
-									font.Content = Path.Combine(subFolder.FullName, "Content", font.Content);
+									font.Content = Path.Combine(path, subFolder.Name, "Content", font.Content);
 									_fonts.LoadFont(font);
 								}
 							}
@@ -168,7 +168,7 @@ namespace FormMatter.OpenGL.ResourcePacks
 							{
 								foreach (var soundEffect in soundEffectsDef)
 								{
-									soundEffect.Content = Path.Combine(subFolder.FullName, "Content", soundEffect.Content);
+									soundEffect.Content = Path.Combine(path, subFolder.Name, "Content", soundEffect.Content);
 									_audio.LoadSoundEffect(soundEffect);
 								}
 							}
