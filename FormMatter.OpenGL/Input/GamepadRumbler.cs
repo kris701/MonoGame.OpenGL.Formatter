@@ -9,9 +9,9 @@ namespace FormMatter.OpenGL.Input
 	public class GamepadRumbler
 	{
 		/// <summary>
-		/// Index of what player to use
+		/// Index of what players to use
 		/// </summary>
-		public int PlayerIndex { get; set; }
+		public List<int> PlayerIndexes { get; set; }
 		/// <summary>
 		/// How long a rumble should last.
 		/// </summary>
@@ -29,13 +29,25 @@ namespace FormMatter.OpenGL.Input
 		private bool _isRumbling = false;
 
 		/// <summary>
+		/// Main constructor
+		/// </summary>
+		/// <param name="playerIndexes"></param>
+		/// <param name="rumbleTime"></param>
+		public GamepadRumbler(List<int> playerIndexes, TimeSpan rumbleTime)
+		{
+			PlayerIndexes = playerIndexes;
+			RumbleTime = rumbleTime;
+		}
+
+		/// <summary>
 		/// Start rumbling the controller
 		/// </summary>
 		public void Rumble()
 		{
 			_lasted = TimeSpan.Zero;
 			_isRumbling = true;
-			GamePad.SetVibration(PlayerIndex, LeftMotor, RightMotor);
+			foreach(var index in PlayerIndexes)
+				GamePad.SetVibration(index, LeftMotor, RightMotor);
 		}
 
 		/// <summary>
@@ -50,7 +62,8 @@ namespace FormMatter.OpenGL.Input
 				if (_lasted > RumbleTime)
 				{
 					_isRumbling = false;
-					GamePad.SetVibration(PlayerIndex, 0, 0);
+					foreach (var index in PlayerIndexes)
+						GamePad.SetVibration(index, 0, 0);
 				}
 			}
 		}

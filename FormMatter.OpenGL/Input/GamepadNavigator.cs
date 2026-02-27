@@ -61,9 +61,9 @@ namespace FormMatter.OpenGL.Input
 		public GamepadNavigatorOnInputEventHandler? OnEnterKeyDown;
 
 		/// <summary>
-		/// Index of what controller to use
+		/// Index of what controllers to use
 		/// </summary>
-		public int PlayerIndex { get; set; } = 0;
+		public List<int> PlayerIndexes { get; set; } = new List<int>() { 0 };
 
 		private readonly IView _view;
 		private bool _keyDown = false;
@@ -117,8 +117,10 @@ namespace FormMatter.OpenGL.Input
 		/// </summary>
 		public void Update()
 		{
-			var gamepadState = GamePad.GetState(PlayerIndex);
-			if (LeftKeys.Any(x => gamepadState.IsButtonDown(x)))
+			var gamepadStates = new List<GamePadState>();
+			foreach (var index in PlayerIndexes)
+				gamepadStates.Add(GamePad.GetState(index));
+			if (LeftKeys.Any(x => gamepadStates.Any(y => y.IsButtonDown(x))))
 			{
 				if (!_keyDown)
 				{
@@ -130,7 +132,7 @@ namespace FormMatter.OpenGL.Input
 				}
 				_keyDown = true;
 			}
-			else if (RightKeys.Any(x => gamepadState.IsButtonDown(x)))
+			else if (RightKeys.Any(x => gamepadStates.Any(y => y.IsButtonDown(x))))
 			{
 				if (!_keyDown)
 				{
@@ -142,7 +144,7 @@ namespace FormMatter.OpenGL.Input
 				}
 				_keyDown = true;
 			}
-			else if (UpKeys.Any(x => gamepadState.IsButtonDown(x)))
+			else if (UpKeys.Any(x => gamepadStates.Any(y => y.IsButtonDown(x))))
 			{
 				if (!_keyDown)
 				{
@@ -154,7 +156,7 @@ namespace FormMatter.OpenGL.Input
 				}
 				_keyDown = true;
 			}
-			else if (DownKeys.Any(x => gamepadState.IsButtonDown(x)))
+			else if (DownKeys.Any(x => gamepadStates.Any(y => y.IsButtonDown(x))))
 			{
 				if (!_keyDown)
 				{
@@ -166,7 +168,7 @@ namespace FormMatter.OpenGL.Input
 				}
 				_keyDown = true;
 			}
-			else if (EnterKeys.Any(x => gamepadState.IsButtonDown(x)))
+			else if (EnterKeys.Any(x => gamepadStates.Any(y => y.IsButtonDown(x))))
 			{
 				if (!_keyDown)
 				{

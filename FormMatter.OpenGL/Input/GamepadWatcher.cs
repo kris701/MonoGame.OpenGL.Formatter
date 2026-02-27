@@ -14,7 +14,7 @@ namespace FormMatter.OpenGL.Input
 		/// <summary>
 		/// Index of what controller to use
 		/// </summary>
-		public int PlayerIndex { get; set; } = 0;
+		public List<int> PlayerIndexes { get; set; } = new List<int>() { 0 };
 
 		private bool _isDown = false;
 		private readonly Action? _pressAction;
@@ -38,14 +38,16 @@ namespace FormMatter.OpenGL.Input
 		/// </summary>
 		public void Update()
 		{
-			var state = GamePad.GetState(PlayerIndex);
-			if (!_isDown && state.IsButtonDown(Button))
+			var states = new List<GamePadState>();
+			foreach (var index in PlayerIndexes)
+				states.Add(GamePad.GetState(index));
+			if (!_isDown && states.Any(x => x.IsButtonDown(Button)))
 			{
 				if (_pressAction != null)
 					_pressAction.Invoke();
 				_isDown = true;
 			}
-			else if (_isDown && state.IsButtonUp(Button))
+			else if (_isDown && states.All(x => x.IsButtonUp(Button)))
 			{
 				if (_unpressAction != null)
 					_unpressAction.Invoke();
