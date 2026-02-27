@@ -79,17 +79,15 @@ namespace FormMatter.OpenGL.Input
 		/// <param name="down"></param>
 		/// <param name="enter"></param>
 		/// <param name="layer"></param>
-		public GamepadNavigator(IView view, IControl selector, Buttons left, Buttons right, Buttons up, Buttons down, Buttons enter, int layer)
+		public GamepadNavigator(IView view, IControl selector, Buttons left, Buttons right, Buttons up, Buttons down, Buttons enter, int layer) : base(selector, new List<int>() { layer })
 		{
 			_view = view;
-			Selector = selector;
 			Selector.IsVisible = false;
 			LeftKeys = new List<Buttons>() { left };
 			RightKeys = new List<Buttons>() { right };
 			UpKeys = new List<Buttons>() { up };
 			DownKeys = new List<Buttons>() { down };
 			EnterKeys = new List<Buttons>() { enter };
-			Layers = new List<int>() { layer };
 		}
 
 		/// <summary>
@@ -103,17 +101,15 @@ namespace FormMatter.OpenGL.Input
 		/// <param name="down"></param>
 		/// <param name="enter"></param>
 		/// <param name="layers"></param>
-		public GamepadNavigator(IView view, IControl selector, List<Buttons> left, List<Buttons> right, List<Buttons> up, List<Buttons> down, List<Buttons> enter, List<int> layers)
+		public GamepadNavigator(IView view, IControl selector, List<Buttons> left, List<Buttons> right, List<Buttons> up, List<Buttons> down, List<Buttons> enter, List<int> layers) : base(selector, layers)
 		{
 			_view = view;
-			Selector = selector;
 			Selector.IsVisible = false;
 			LeftKeys = left;
 			RightKeys = right;
 			UpKeys = up;
 			DownKeys = down;
 			EnterKeys = enter;
-			Layers = layers;
 		}
 
 		/// <summary>

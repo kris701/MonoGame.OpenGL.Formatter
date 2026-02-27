@@ -4,6 +4,9 @@ using ToolsSharp;
 
 namespace FormMatter.OpenGL.Input
 {
+	/// <summary>
+	/// Core directional navigator
+	/// </summary>
 	public abstract class BaseNavigator
 	{
 		/// <summary>
@@ -23,6 +26,51 @@ namespace FormMatter.OpenGL.Input
 		/// The currently focused element
 		/// </summary>
 		public IControl? Focused { get; set; } = null;
+
+		/// <summary>
+		/// Main constructor
+		/// </summary>
+		/// <param name="selector"></param>
+		/// <param name="layers"></param>
+		public BaseNavigator(IControl selector, List<int> layers)
+		{
+			Selector = selector;
+			Layers = layers;
+		}
+
+		/// <summary>
+		/// Goto the closes valid control in a view
+		/// </summary>
+		/// <param name="view"></param>
+		public void GotoClosest(IView view)
+		{
+			IControl? any = null;
+			var currentX = Focused == null ? 0 : Focused.X;
+			var currentY = Focused == null ? 0 : Focused.Y;
+			int shortest = int.MaxValue;
+			foreach (var layer in Layers)
+			{
+				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
+				foreach (var control in controls)
+				{
+					if (control == any || control == Focused || control == Selector)
+						continue;
+
+					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
+					if (dist < shortest)
+					{
+						any = control;
+						shortest = dist;
+					}
+				}
+			}
+
+			if (any != null)
+			{
+				Focused = any;
+				UpdateFocusedPosition();
+			}
+		}
 
 		internal bool Left(IView view)
 		{

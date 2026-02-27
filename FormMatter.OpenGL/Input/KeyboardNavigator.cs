@@ -74,17 +74,15 @@ namespace FormMatter.OpenGL.Input
 		/// <param name="down"></param>
 		/// <param name="enter"></param>
 		/// <param name="layer"></param>
-		public KeyboardNavigator(IView view, IControl selector, Keys left, Keys right, Keys up, Keys down, Keys enter, int layer)
+		public KeyboardNavigator(IView view, IControl selector, Keys left, Keys right, Keys up, Keys down, Keys enter, int layer) : base(selector, new List<int>() { layer })
 		{
 			_view = view;
-			Selector = selector;
 			Selector.IsVisible = false;
 			LeftKeys = new List<Keys>() { left };
 			RightKeys = new List<Keys>() { right };
 			UpKeys = new List<Keys>() { up };
 			DownKeys = new List<Keys>() { down };
 			EnterKeys = new List<Keys>() { enter };
-			Layers = new List<int>() { layer };
 		}
 
 		/// <summary>
@@ -98,17 +96,15 @@ namespace FormMatter.OpenGL.Input
 		/// <param name="down"></param>
 		/// <param name="enter"></param>
 		/// <param name="layers"></param>
-		public KeyboardNavigator(IView view, IControl selector, List<Keys> left, List<Keys> right, List<Keys> up, List<Keys> down, List<Keys> enter, List<int> layers)
+		public KeyboardNavigator(IView view, IControl selector, List<Keys> left, List<Keys> right, List<Keys> up, List<Keys> down, List<Keys> enter, List<int> layers) : base(selector, layers)
 		{
 			_view = view;
-			Selector = selector;
 			Selector.IsVisible = false;
 			LeftKeys = left;
 			RightKeys = right;
 			UpKeys = up;
 			DownKeys = down;
 			EnterKeys = enter;
-			Layers = layers;
 		}
 
 		/// <summary>
