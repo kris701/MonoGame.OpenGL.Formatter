@@ -208,7 +208,7 @@ namespace FormMatter.OpenGL.Input
 			return false;
 		}
 
-		private void UpdateFocusedPosition()
+		public void UpdateFocusedPosition()
 		{
 			if (Focused == null)
 				return;
