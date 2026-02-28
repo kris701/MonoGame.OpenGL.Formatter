@@ -54,9 +54,13 @@ namespace FormMatter.OpenGL.Controls
 		public float TextHeight => _element._textHeight;
 
 		/// <summary>
-		/// If the control should set its width and height to be what the text element occupies
+		/// If the control should set its height to be what the text element occupies
 		/// </summary>
-		public bool FitText { get; set; } = false;
+		public bool FitTextHeight { get; set; } = false;
+		/// <summary>
+		/// If the control should set its width to be what the text element occupies
+		/// </summary>
+		public bool FitTextWidth { get; set; } = false;
 
 		private readonly TextElement _element;
 
@@ -79,11 +83,10 @@ namespace FormMatter.OpenGL.Controls
 		{
 			_element.Initialize();
 			base.Initialize();
-			if (FitText)
-			{
+			if (FitTextWidth)
 				Width = _element._textWidth;
-				Height = _element._textHeight;
-			}
+			if (FitTextHeight)
+				Width = _element._textHeight;
 		}
 
 		/// <summary>
