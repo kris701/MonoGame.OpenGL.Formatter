@@ -28,6 +28,14 @@ namespace FormMatter.OpenGL.Input
 		public IControl? Focused { get; set; } = null;
 
 		/// <summary>
+		/// The maximum distance that you allow to jump to
+		/// </summary>
+		public int MaxDistance { get; set; } = int.MaxValue;
+
+		private static double _rad2Deg = 57.2957795130823209;
+		private static double _arc = 80;
+
+		/// <summary>
 		/// Main constructor
 		/// </summary>
 		/// <param name="selector"></param>
@@ -57,7 +65,7 @@ namespace FormMatter.OpenGL.Input
 						continue;
 
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
-					if (dist < shortest)
+					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
 						shortest = dist;
@@ -88,8 +96,15 @@ namespace FormMatter.OpenGL.Input
 					if (control.X >= currentX)
 						continue;
 
+					var angleRad = Math.Atan2(currentX - control.X, currentY - control.Y);
+					var angle = angleRad * _rad2Deg;
+					if (angle > 90 + (_arc / 2))
+						continue;
+					if (angle < 90 - (_arc / 2))
+						continue;
+
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
-					if (dist < shortest)
+					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
 						shortest = dist;
@@ -122,8 +137,15 @@ namespace FormMatter.OpenGL.Input
 					if (control.X <= currentX)
 						continue;
 
+					var angleRad = Math.Atan2(control.X - currentX, currentY - control.Y);
+					var angle = angleRad * _rad2Deg;
+					if (angle > 90 + (_arc / 2))
+						continue;
+					if (angle < 90 - (_arc / 2))
+						continue;
+
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
-					if (dist < shortest)
+					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
 						shortest = dist;
@@ -156,8 +178,15 @@ namespace FormMatter.OpenGL.Input
 					if (control.Y >= currentY)
 						continue;
 
+					var angleRad = Math.Atan2(currentX - control.X, currentY - control.Y);
+					var angle = angleRad * _rad2Deg;
+					if (angle > (_arc / 2))
+						continue;
+					if (angle < -(_arc / 2))
+						continue;
+
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
-					if (dist < shortest)
+					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
 						shortest = dist;
@@ -190,8 +219,15 @@ namespace FormMatter.OpenGL.Input
 					if (control.Y <= currentY)
 						continue;
 
+					var angleRad = Math.Atan2(currentX - control.X, control.Y - currentY);
+					var angle = angleRad * _rad2Deg;
+					if (angle > (_arc / 2))
+						continue;
+					if (angle < -(_arc / 2))
+						continue;
+
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
-					if (dist < shortest)
+					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
 						shortest = dist;
@@ -208,6 +244,9 @@ namespace FormMatter.OpenGL.Input
 			return false;
 		}
 
+		/// <summary>
+		/// Update the focused element position
+		/// </summary>
 		public void UpdateFocusedPosition()
 		{
 			if (Focused == null)
