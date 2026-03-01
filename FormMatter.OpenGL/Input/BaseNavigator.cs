@@ -32,8 +32,12 @@ namespace FormMatter.OpenGL.Input
 		/// </summary>
 		public int MaxDistance { get; set; } = int.MaxValue;
 
+		/// <summary>
+		/// The arc of where to look for controls at
+		/// </summary>
+		public double Arc { get; set; } = 80;
+
 		private static double _rad2Deg = 57.2957795130823209;
-		private static double _arc = 80;
 
 		/// <summary>
 		/// Main constructor
@@ -98,9 +102,9 @@ namespace FormMatter.OpenGL.Input
 
 					var angleRad = Math.Atan2(currentX - control.X, currentY - control.Y);
 					var angle = angleRad * _rad2Deg;
-					if (angle > 90 + (_arc / 2))
+					if (angle > 90 + (Arc / 2))
 						continue;
-					if (angle < 90 - (_arc / 2))
+					if (angle < 90 - (Arc / 2))
 						continue;
 
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
@@ -139,9 +143,9 @@ namespace FormMatter.OpenGL.Input
 
 					var angleRad = Math.Atan2(control.X - currentX, currentY - control.Y);
 					var angle = angleRad * _rad2Deg;
-					if (angle > 90 + (_arc / 2))
+					if (angle > 90 + (Arc / 2))
 						continue;
-					if (angle < 90 - (_arc / 2))
+					if (angle < 90 - (Arc / 2))
 						continue;
 
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
@@ -180,9 +184,9 @@ namespace FormMatter.OpenGL.Input
 
 					var angleRad = Math.Atan2(currentX - control.X, currentY - control.Y);
 					var angle = angleRad * _rad2Deg;
-					if (angle > (_arc / 2))
+					if (angle > (Arc / 2))
 						continue;
-					if (angle < -(_arc / 2))
+					if (angle < -(Arc / 2))
 						continue;
 
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
@@ -221,9 +225,9 @@ namespace FormMatter.OpenGL.Input
 
 					var angleRad = Math.Atan2(currentX - control.X, control.Y - currentY);
 					var angle = angleRad * _rad2Deg;
-					if (angle > (_arc / 2))
+					if (angle > (Arc / 2))
 						continue;
-					if (angle < -(_arc / 2))
+					if (angle < -(Arc / 2))
 						continue;
 
 					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
