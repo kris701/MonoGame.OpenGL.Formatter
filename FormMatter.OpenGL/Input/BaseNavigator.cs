@@ -57,18 +57,20 @@ namespace FormMatter.OpenGL.Input
 		public void GotoClosest(IView view)
 		{
 			IControl? any = null;
-			var currentX = Focused == null ? 0 : Focused.X;
-			var currentY = Focused == null ? 0 : Focused.Y;
+			var currentX = Focused == null ? 0 : Focused.X + Focused.Width / 2;
+			var currentY = Focused == null ? 0 : Focused.Y + Focused.Height / 2;
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
 				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
+					var targetX = control.X + control.Width / 2;
+					var targetY = control.Y + control.Height / 2;
 					if (control == any || control == Focused || control == Selector)
 						continue;
 
-					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
+					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)targetX, (int)targetY), new System.Drawing.Point((int)currentX, (int)currentY));
 					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
@@ -87,27 +89,29 @@ namespace FormMatter.OpenGL.Input
 		internal bool Left(IView view)
 		{
 			IControl? any = null;
-			var currentX = Focused == null ? 0 : Focused.X;
-			var currentY = Focused == null ? 0 : Focused.Y;
+			var currentX = Focused == null ? 0 : Focused.X + Focused.Width / 2;
+			var currentY = Focused == null ? 0 : Focused.Y + Focused.Height / 2;
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
 				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
+					var targetX = control.X + control.Width / 2;
+					var targetY = control.Y + control.Height / 2;
 					if (control == any || control == Focused || control == Selector)
 						continue;
-					if (control.X >= currentX)
+					if (targetX >= currentX)
 						continue;
 
-					var angleRad = Math.Atan2(currentX - control.X, currentY - control.Y);
+					var angleRad = Math.Atan2(currentX - targetX, currentY - targetY);
 					var angle = angleRad * _rad2Deg;
 					if (angle > 90 + (Arc / 2))
 						continue;
 					if (angle < 90 - (Arc / 2))
 						continue;
 
-					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
+					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)targetX, (int)targetY), new System.Drawing.Point((int)currentX, (int)currentY));
 					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
@@ -128,27 +132,29 @@ namespace FormMatter.OpenGL.Input
 		internal bool Right(IView view)
 		{
 			IControl? any = null;
-			var currentX = Focused == null ? 0 : Focused.X;
-			var currentY = Focused == null ? 0 : Focused.Y;
+			var currentX = Focused == null ? 0 : Focused.X + Focused.Width / 2;
+			var currentY = Focused == null ? 0 : Focused.Y + Focused.Height / 2;
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
 				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
+					var targetX = control.X + control.Width / 2;
+					var targetY = control.Y + control.Height / 2;
 					if (control == any || control == Focused || control == Selector)
 						continue;
-					if (control.X <= currentX)
+					if (targetX <= currentX)
 						continue;
 
-					var angleRad = Math.Atan2(control.X - currentX, currentY - control.Y);
+					var angleRad = Math.Atan2(targetX - currentX, currentY - targetY);
 					var angle = angleRad * _rad2Deg;
 					if (angle > 90 + (Arc / 2))
 						continue;
 					if (angle < 90 - (Arc / 2))
 						continue;
 
-					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
+					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)targetX, (int)targetY), new System.Drawing.Point((int)currentX, (int)currentY));
 					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
@@ -169,27 +175,29 @@ namespace FormMatter.OpenGL.Input
 		internal bool Up(IView view)
 		{
 			IControl? any = null;
-			var currentX = Focused == null ? 0 : Focused.X;
-			var currentY = Focused == null ? 0 : Focused.Y;
+			var currentX = Focused == null ? 0 : Focused.X + Focused.Width / 2;
+			var currentY = Focused == null ? 0 : Focused.Y + Focused.Height / 2;
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
 				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
+					var targetX = control.X + control.Width / 2;
+					var targetY = control.Y + control.Height / 2;
 					if (control == any || control == Focused || control == Selector)
 						continue;
-					if (control.Y >= currentY)
+					if (targetY >= currentY)
 						continue;
 
-					var angleRad = Math.Atan2(currentX - control.X, currentY - control.Y);
+					var angleRad = Math.Atan2(currentX - targetX, currentY - targetY);
 					var angle = angleRad * _rad2Deg;
 					if (angle > (Arc / 2))
 						continue;
 					if (angle < -(Arc / 2))
 						continue;
 
-					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
+					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)targetX, (int)targetY), new System.Drawing.Point((int)currentX, (int)currentY));
 					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
@@ -210,27 +218,29 @@ namespace FormMatter.OpenGL.Input
 		internal bool Down(IView view)
 		{
 			IControl? any = null;
-			var currentX = Focused == null ? 0 : Focused.X;
-			var currentY = Focused == null ? 0 : Focused.Y;
+			var currentX = Focused == null ? 0 : Focused.X + Focused.Width / 2;
+			var currentY = Focused == null ? 0 : Focused.Y + Focused.Height / 2;
 			int shortest = int.MaxValue;
 			foreach (var layer in Layers)
 			{
 				var controls = view.GetAll(layer).Where(x => x is IFocusable).Cast<IFocusable>().Where(x => x.IsVisible && x.IsEnabled);
 				foreach (var control in controls)
 				{
+					var targetX = control.X + control.Width / 2;
+					var targetY = control.Y + control.Height / 2;
 					if (control == any || control == Focused || control == Selector)
 						continue;
-					if (control.Y <= currentY)
+					if (targetY <= currentY)
 						continue;
 
-					var angleRad = Math.Atan2(currentX - control.X, control.Y - currentY);
+					var angleRad = Math.Atan2(currentX - targetX, targetY - currentY);
 					var angle = angleRad * _rad2Deg;
 					if (angle > (Arc / 2))
 						continue;
 					if (angle < -(Arc / 2))
 						continue;
 
-					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)control.X, (int)control.Y), new System.Drawing.Point((int)currentX, (int)currentY));
+					int dist = (int)MathHelper.EuclideanDistance2D(new System.Drawing.Point((int)targetX, (int)targetY), new System.Drawing.Point((int)currentX, (int)currentY));
 					if (dist < shortest && dist < MaxDistance)
 					{
 						any = control;
